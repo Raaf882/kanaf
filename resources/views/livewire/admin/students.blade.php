@@ -35,16 +35,16 @@
                 </svg>
             </a>
             <div>
-                <div class="flex items-center gap-2 text-xs text-gray-400 mb-1">
+                <div class="flex items-center gap-2 text-sm text-gray-400 mb-1">
                     <a href="{{ route('admin.dashboard') }}" class="hover:text-[#1A6B3C]">لوحة الإدارة</a>
                     <span>/</span>
                     <span class="text-gray-600 font-semibold">إدارة الطلاب</span>
                 </div>
-                <h1 class="text-2xl font-extrabold text-gray-900">إدارة الطلاب</h1>
+                <h1 class="text-3xl font-extrabold text-gray-900">إدارة الطلاب</h1>
             </div>
         </div>
         <button wire:click="openCreate"
-                class="flex items-center gap-2 bg-[#1A6B3C] hover:bg-[#155C33] text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-colors shadow-sm shadow-[#1A6B3C]/20">
+                class="flex items-center gap-2 bg-[#1A6B3C] hover:bg-[#155C33] text-white text-base font-bold px-5 py-2.5 rounded-xl transition-colors shadow-sm shadow-[#1A6B3C]/20">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
             </svg>
@@ -71,7 +71,7 @@
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead>
-                    <tr class="text-gray-500 border-b border-gray-100 bg-gray-50 text-xs font-semibold">
+                    <tr class="text-gray-500 border-b border-gray-100 bg-gray-50 text-sm font-semibold">
                         <th class="text-right px-5 py-3">الاسم</th>
                         <th class="text-right px-5 py-3">البريد الإلكتروني</th>
                         <th class="text-right px-5 py-3">الرقم الجامعي</th>

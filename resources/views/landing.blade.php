@@ -265,6 +265,22 @@
 </dga-nav-header>
 
 <script>
+customElements.whenDefined('dga-nav-header-logos').then(function () {
+    function shrinkLogo() {
+        document.querySelectorAll('dga-nav-header-logos').forEach(function (el) {
+            if (el.shadowRoot) {
+                if (!el.shadowRoot.querySelector('style[data-kanaf-logo]')) {
+                    var s = document.createElement('style');
+                    s.setAttribute('data-kanaf-logo', '1');
+                    s.textContent = '.header__logo img { height: 32px !important; width: auto !important; }';
+                    el.shadowRoot.appendChild(s);
+                }
+            }
+        });
+    }
+    requestAnimationFrame(shrinkLogo);
+    setTimeout(shrinkLogo, 400);
+});
 document.addEventListener('DOMContentLoaded', function () {
     function goTo(id, url) {
         var el = document.getElementById(id);

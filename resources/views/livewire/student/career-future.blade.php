@@ -39,11 +39,11 @@
             </svg>
         </div>
         <div>
-            <h1 style="font-size:1.6rem; font-weight:900; margin:0 0 4px;">مستقبلك المهني</h1>
+            <h1 style="font-size:1.8rem; font-weight:900; margin:0 0 4px;">مستقبلك المهني</h1>
             @if($this->isNewStudent)
-                <p style="font-size:0.9rem; opacity:0.85;">تعرّف على الفرص والمسارات المهنية المطلوبة في سوق العمل السعودي بناءً على تخصصك.</p>
+                <p style="font-size:1rem; opacity:0.85;">تعرّف على الفرص والمسارات المهنية المطلوبة في سوق العمل السعودي بناءً على تخصصك.</p>
             @else
-                <p style="font-size:0.9rem; opacity:0.85;">بناءً على أدائك الأكاديمي واهتماماتك — هذه مسارات مهنية مناسبة يمكنك استكشافها.</p>
+                <p style="font-size:1rem; opacity:0.85;">بناءً على أدائك الأكاديمي واهتماماتك — هذه مسارات مهنية مناسبة يمكنك استكشافها.</p>
             @endif
         </div>
     </div>
@@ -52,7 +52,7 @@
     @if($this->isNewStudent)
     <div class="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6">
         <span class="text-xl flex-shrink-0">📌</span>
-        <p class="text-gray-700 text-sm leading-relaxed">
+        <p class="text-gray-700 text-base leading-relaxed">
             اكتشافك المبكر للمسارات المهنية يساعدك على بناء مهاراتك وخبراتك بشكل أوضح خلال رحلتك الجامعية.
         </p>
     </div>
@@ -60,8 +60,8 @@
     <div class="flex items-start gap-3 bg-[#F0FAF4] border border-[#1A6B3C]/20 rounded-2xl p-4 mb-6">
         <span class="text-xl flex-shrink-0">📌</span>
         <div>
-            <p class="text-gray-700 text-sm font-bold mb-0.5">كيف تم اختيار المسارات؟</p>
-            <p class="text-gray-600 text-sm leading-relaxed">
+            <p class="text-gray-700 text-base font-bold mb-0.5">كيف تم اختيار المسارات؟</p>
+            <p class="text-gray-600 text-base leading-relaxed">
                 تم بناء هذه التوصيات اعتماداً على المواد التي يظهر فيها أداؤك مرتفع، بالإضافة إلى الأنماط العامة في تقدمك الأكاديمي.
             </p>
         </div>
@@ -88,18 +88,18 @@
                     </svg>
                 </div>
                 <div class="flex-1">
-                    <h3 class="font-black text-[#1A6B3C] text-base">{{ $path->name }}</h3>
-                    <p class="text-gray-500 text-sm mt-1 leading-relaxed">{{ $path->description }}</p>
+                    <h3 class="font-black text-[#1A6B3C] text-lg">{{ $path->name }}</h3>
+                    <p class="text-gray-500 text-base mt-1 leading-relaxed">{{ $path->description }}</p>
                 </div>
             </div>
 
             {{-- Skills --}}
             @if(!empty($path->core_skills))
             <div class="mb-4">
-                <p class="font-black text-gray-800 text-sm mb-2">أهم المهارات</p>
+                <p class="font-black text-gray-800 text-base mb-2">أهم المهارات</p>
                 <ul class="space-y-1">
                     @foreach(array_slice($path->core_skills, 0, 4) as $skill)
-                    <li class="flex items-center gap-1.5 justify-end text-sm text-gray-600">
+                    <li class="flex items-center gap-1.5 justify-end text-base text-gray-600">
                         <span>{{ $skill }}</span>
                         <span class="w-1.5 h-1.5 rounded-full bg-[#1A6B3C] flex-shrink-0"></span>
                     </li>
@@ -111,11 +111,11 @@
             {{-- Save button --}}
             <div class="flex gap-2 mt-4">
                 <a href="{{ route('career-path-detail', $path) }}"
-                   class="flex-1 text-center text-sm font-bold py-2.5 px-4 rounded-xl bg-[#1A6B3C] text-white hover:bg-[#155e34] transition-colors">
+                   class="flex-1 text-center text-base font-bold py-2.5 px-4 rounded-xl bg-[#1A6B3C] text-white hover:bg-[#155e34] transition-colors">
                     استعراض المسار
                 </a>
                 <button wire:click="toggleSave({{ $path->id }})"
-                        class="flex-1 text-sm font-bold py-2.5 px-4 rounded-xl border-2 transition-colors
+                        class="flex-1 text-base font-bold py-2.5 px-4 rounded-xl border-2 transition-colors
                                {{ $isSaved
                                   ? 'border-[#1A6B3C] bg-[#F0FAF4] text-[#1A6B3C]'
                                   : 'border-gray-200 text-gray-600 hover:border-[#1A6B3C] hover:text-[#1A6B3C]' }}">
@@ -150,8 +150,8 @@
                     </svg>
                 </div>
                 <div class="flex-1">
-                    <h3 class="font-black text-[#1A6B3C] text-base">{{ $path->name }}</h3>
-                    <p class="text-gray-500 text-sm mt-1 leading-relaxed">{{ $path->description }}</p>
+                    <h3 class="font-black text-[#1A6B3C] text-lg">{{ $path->name }}</h3>
+                    <p class="text-gray-500 text-base mt-1 leading-relaxed">{{ $path->description }}</p>
                 </div>
             </div>
 

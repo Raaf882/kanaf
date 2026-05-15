@@ -50,7 +50,7 @@
      SECTION 2: ملخص اليوم
 ══════════════════════════════════════════ --}}
 <div dir="rtl">
-    <h2 class="text-xl font-black text-gray-900 mb-4 text-right">ملخص اليوم</h2>
+    <h2 class="text-2xl font-black text-gray-900 mb-4 text-right">ملخص اليوم</h2>
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
 
         @php
@@ -68,9 +68,9 @@
                 </svg>
             </div>
             <p class="text-3xl font-black text-gray-900">{{ $todayCount }}</p>
-            <p class="text-xs text-gray-400 mt-1 font-semibold leading-snug">لديك جلسات مجدولة لهذا اليوم</p>
+            <p class="text-sm text-gray-400 mt-1 font-semibold leading-snug">لديك جلسات مجدولة لهذا اليوم</p>
             <button onclick="document.getElementById('sessions')?.scrollIntoView({behavior:'smooth'})"
-                    class="mt-3 w-full text-xs font-bold py-2 rounded-lg bg-[#1A6B3C] text-white hover:bg-[#155e34] transition-colors">
+                    class="mt-3 w-full text-sm font-bold py-2 rounded-lg bg-[#1A6B3C] text-white hover:bg-[#155e34] transition-colors">
                 عرض الجلسات
             </button>
         </div>
@@ -83,9 +83,9 @@
                 </svg>
             </div>
             <p class="text-3xl font-black text-gray-900">{{ $totalCount }}</p>
-            <p class="text-xs text-gray-400 mt-1 font-semibold leading-snug">استعراض الطلاب المسجلين تحت إشرافك</p>
+            <p class="text-sm text-gray-400 mt-1 font-semibold leading-snug">استعراض الطلاب المسجلين تحت إشرافك</p>
             <button onclick="document.getElementById('students-tracking')?.scrollIntoView({behavior:'smooth'})"
-                    class="mt-3 w-full text-xs font-bold py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors">
+                    class="mt-3 w-full text-sm font-bold py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition-colors">
                 عرض الطلاب
             </button>
         </div>
@@ -98,9 +98,9 @@
                 </svg>
             </div>
             <p class="text-3xl font-black text-gray-900">{{ $outstandingCount }}</p>
-            <p class="text-xs text-gray-400 mt-1 font-semibold leading-snug">طلاب مرشحون لفرص أكاديمية ومهنية</p>
+            <p class="text-sm text-gray-400 mt-1 font-semibold leading-snug">طلاب مرشحون لفرص أكاديمية ومهنية</p>
             <button onclick="document.getElementById('outstanding-students')?.scrollIntoView({behavior:'smooth'})"
-                    class="mt-3 w-full text-xs font-bold py-2 rounded-lg bg-amber-500 text-white hover:bg-amber-600 transition-colors">
+                    class="mt-3 w-full text-sm font-bold py-2 rounded-lg bg-amber-500 text-white hover:bg-amber-600 transition-colors">
                 عرض الطلاب
             </button>
         </div>
@@ -113,9 +113,9 @@
                 </svg>
             </div>
             <p class="text-3xl font-black text-gray-900">{{ $criticalCount }}</p>
-            <p class="text-xs text-gray-400 mt-1 font-semibold leading-snug">تم رصد حالات تحتاج متابعة أكاديمية عاجل</p>
+            <p class="text-sm text-gray-400 mt-1 font-semibold leading-snug">تم رصد حالات تحتاج متابعة أكاديمية عاجل</p>
             <button onclick="document.getElementById('critical-students')?.scrollIntoView({behavior:'smooth'})"
-                    class="mt-3 w-full text-xs font-bold py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors">
+                    class="mt-3 w-full text-sm font-bold py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors">
                 عرض الطلاب
             </button>
         </div>
@@ -140,21 +140,21 @@
             </svg>
         </div>
         <div>
-            <h3 class="font-black text-gray-800 text-base">تحليل الذكاء الاصطناعي — SAP Model</h3>
-            <p class="text-xs text-gray-500">فحص احتمالية التدني الأكاديمي لطلابك</p>
+            <h3 class="font-black text-gray-800 text-lg">تحليل الذكاء الاصطناعي — SAP Model</h3>
+            <p class="text-sm text-gray-500">فحص احتمالية التدني الأكاديمي لطلابك</p>
         </div>
-        <span class="mr-auto text-xs font-bold px-3 py-1 rounded-full bg-indigo-100 text-indigo-700">
+        <span class="mr-auto text-sm font-bold px-3 py-1 rounded-full bg-indigo-100 text-indigo-700">
             تم فحص {{ $sapScanned }} من {{ $sapTotal }}
         </span>
     </div>
     <div class="grid grid-cols-2 gap-4">
         <div class="bg-white rounded-xl p-4 text-center border border-red-100">
             <p class="text-3xl font-black text-red-600">{{ $sapAtRisk }}</p>
-            <p class="text-xs text-gray-500 mt-1">طلاب في خطر تدني (AI)</p>
+            <p class="text-sm text-gray-500 mt-1">طلاب في خطر تدني (AI)</p>
         </div>
         <div class="bg-white rounded-xl p-4 text-center border border-emerald-100">
             <p class="text-3xl font-black text-emerald-600">{{ $sapScanned - $sapAtRisk }}</p>
-            <p class="text-xs text-gray-500 mt-1">طلاب بأداء مستقر (AI)</p>
+            <p class="text-sm text-gray-500 mt-1">طلاب بأداء مستقر (AI)</p>
         </div>
     </div>
 </div>
@@ -165,8 +165,8 @@
 ══════════════════════════════════════════ --}}
 <div id="critical-students">
     <div class="flex items-center justify-between mb-5">
-        <p class="text-sm text-gray-400">طلاب تم رصد مؤشرات أكاديمية تستدعي التدخل والمتابعة المبكرة.</p>
-        <h2 class="text-xl font-black text-gray-900">الطلاب الأكثر احتياجاً للدعم</h2>
+        <p class="text-base text-gray-400">طلاب تم رصد مؤشرات أكاديمية تستدعي التدخل والمتابعة المبكرة.</p>
+        <h2 class="text-2xl font-black text-gray-900">الطلاب الأكثر احتياجاً للدعم</h2>
     </div>
 
     @if($this->criticalStudents->isEmpty())
@@ -188,8 +188,8 @@
 ══════════════════════════════════════════ --}}
 <div id="outstanding-students">
     <div class="flex items-center justify-between mb-5">
-        <p class="text-sm text-gray-400">طلاب أظهروا أداءً متميزاً ولم تُراعَ لهم الفرص الأكاديمية أو المهنية المناسبة.</p>
-        <h2 class="text-xl font-black text-gray-900">الطلاب المتميزون</h2>
+        <p class="text-base text-gray-400">طلاب أظهروا أداءً متميزاً ولم تُراعَ لهم الفرص الأكاديمية أو المهنية المناسبة.</p>
+        <h2 class="text-2xl font-black text-gray-900">الطلاب المتميزون</h2>
     </div>
 
     @if($this->outstandingStudents->isEmpty())
@@ -217,7 +217,7 @@
                    placeholder="بحث عن طالب..."
                    class="text-sm border border-gray-200 rounded-xl px-4 py-2 text-right focus:outline-none focus:ring-2 focus:ring-[#1A6B3C]/30 w-52">
         </div>
-        <h2 class="text-xl font-black text-gray-900">متابعة الطلاب</h2>
+        <h2 class="text-2xl font-black text-gray-900">متابعة الطلاب</h2>
     </div>
     <p class="text-sm text-gray-400 text-right mb-4">تابع أداء طلابك وتمكّن من متابعة كل فرد بشكل مفصّل في كل مستوى دراسي.</p>
 
@@ -273,9 +273,9 @@
             </svg>
             حجز جلسة جديدة
         </button>
-        <h2 class="text-xl font-black text-gray-900">الجلسات</h2>
+        <h2 class="text-2xl font-black text-gray-900">الجلسات</h2>
     </div>
-    <p class="text-sm text-gray-400 text-right mb-4">استعرض الجلسات الأخيرة وتمكّن من متابعة حالة كل جلسة وحضور الطلاب.</p>
+    <p class="text-base text-gray-400 text-right mb-4">استعرض الجلسات الأخيرة وتمكّن من متابعة حالة كل جلسة وحضور الطلاب.</p>
 
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
         @if($this->recentSessions->isEmpty())
@@ -291,12 +291,12 @@
             <table class="w-full text-sm">
                 <thead class="bg-gray-50 border-b border-gray-100">
                     <tr>
-                        <th class="text-right px-4 py-3 text-xs font-black text-gray-500">الحضور</th>
-                        <th class="text-right px-4 py-3 text-xs font-black text-gray-500">الحالة</th>
-                        <th class="text-right px-4 py-3 text-xs font-black text-gray-500">نوع الجلسة</th>
-                        <th class="text-right px-4 py-3 text-xs font-black text-gray-500">وقت الجلسة</th>
-                        <th class="text-right px-4 py-3 text-xs font-black text-gray-500">الطالب</th>
-                        <th class="text-right px-4 py-3 text-xs font-black text-gray-500">الرقم الجامعي</th>
+                        <th class="text-right px-4 py-3 text-sm font-black text-gray-500">الحضور</th>
+                        <th class="text-right px-4 py-3 text-sm font-black text-gray-500">الحالة</th>
+                        <th class="text-right px-4 py-3 text-sm font-black text-gray-500">نوع الجلسة</th>
+                        <th class="text-right px-4 py-3 text-sm font-black text-gray-500">وقت الجلسة</th>
+                        <th class="text-right px-4 py-3 text-sm font-black text-gray-500">الطالب</th>
+                        <th class="text-right px-4 py-3 text-sm font-black text-gray-500">الرقم الجامعي</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
@@ -370,9 +370,9 @@
 <div id="nominations">
     <div class="flex items-center justify-between mb-5">
         <div></div>
-        <h2 class="text-xl font-black text-gray-900">الترشيحات</h2>
+        <h2 class="text-2xl font-black text-gray-900">الترشيحات</h2>
     </div>
-    <p class="text-sm text-gray-400 text-right mb-6">
+    <p class="text-base text-gray-400 text-right mb-6">
         يتيح هذا القسم للمرشد إرسال ترشيحات إلى الطلاب حول فرص أكاديمية أو مهنية مناسبة للطالب.
     </p>
 
@@ -383,7 +383,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {{-- Student ID display (readonly, computed from selection) --}}
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">الرقم الجامعي</label>
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">الرقم الجامعي</label>
                     <input type="text"
                            readonly
                            value="{{ $formStudentId ? ($this->allStudents->firstWhere('id', $formStudentId)?->student_id ?? '—') : '' }}"
@@ -392,7 +392,7 @@
                 </div>
                 {{-- Student selector --}}
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">
                         اسم الطالب <span class="text-red-500">*</span>
                     </label>
                     <select wire:model.live="formStudentId"
@@ -413,7 +413,7 @@
             {{-- Row 2: Event type + Organizer --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">الجهة المنظمة</label>
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">الجهة المنظمة</label>
                     <input wire:model="formOrganizer"
                            type="text"
                            placeholder="اسم الجهة المنظمة للفعالية"
@@ -421,7 +421,7 @@
                                   focus:outline-none focus:ring-2 focus:ring-[#1A6B3C]/30 focus:border-[#1A6B3C]">
                 </div>
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">
                         نوع الفعالية <span class="text-red-500">*</span>
                     </label>
                     <select wire:model="formEventType"
@@ -440,7 +440,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div></div>
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">تاريخ الفعالية</label>
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">تاريخ الفعالية</label>
                     <input wire:model="formEventDate"
                            type="date"
                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-right
@@ -535,24 +535,24 @@
         <div class="p-6 space-y-4">
             <div class="grid grid-cols-2 gap-4">
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">اسم الطالب *</label>
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">اسم الطالب *</label>
                     <input wire:model="bookStudentName" type="text" placeholder="اسم الطالب"
                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-right focus:outline-none focus:ring-2 focus:ring-[#1A6B3C]/30 @error('bookStudentName') border-red-400 @enderror">
                 </div>
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">الرقم الجامعي *</label>
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">الرقم الجامعي *</label>
                     <input wire:model="bookStudentNo" type="text" placeholder="الرقم الجامعي"
                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-right focus:outline-none focus:ring-2 focus:ring-[#1A6B3C]/30 @error('bookStudentNo') border-red-400 @enderror">
                 </div>
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">وقت/تاريخ الجلسة *</label>
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">وقت/تاريخ الجلسة *</label>
                     <input wire:model="bookDateTime" type="datetime-local"
                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-right focus:outline-none focus:ring-2 focus:ring-[#1A6B3C]/30 @error('bookDateTime') border-red-400 @enderror">
                 </div>
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">نوع الجلسة *</label>
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">نوع الجلسة *</label>
                     <select wire:model="bookSessionType"
                             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-right bg-white focus:outline-none focus:ring-2 focus:ring-[#1A6B3C]/30">
                         <option value="academic">إرشاد أكاديمي</option>
@@ -625,12 +625,12 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">الموقع</label>
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">الموقع</label>
                     <input wire:model="nomEventLocation" type="text" placeholder="مدينة أو رابط الفعالية"
                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-right focus:outline-none focus:ring-2 focus:ring-amber-300">
                 </div>
                 <div class="text-right">
-                    <label class="block text-xs font-black text-gray-600 mb-1.5">تاريخ الفعالية</label>
+                    <label class="block text-sm font-black text-gray-600 mb-1.5">تاريخ الفعالية</label>
                     <input wire:model="nomEventDate" type="date"
                            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-right focus:outline-none focus:ring-2 focus:ring-amber-300 @error('nomEventDate') border-red-400 @enderror">
                     @error('nomEventDate') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror

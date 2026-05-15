@@ -118,9 +118,9 @@
                 gov-link="#">
             </dga-nav-header-logos>
             <dga-nav-header-menu>
-                <dga-nav-header-link label="{{ __('الرئيسية') }}"         id="lnl-home"></dga-nav-header-link>
-                <dga-nav-header-link label="{{ __('عن المنصة') }}"        id="lnl-about"></dga-nav-header-link>
-                <dga-nav-header-link label="{{ __('خدماتنا') }}"          id="lnl-services"></dga-nav-header-link>
+                <dga-nav-header-link label="{{ __('الرئيسية') }}"          id="lnl-home"></dga-nav-header-link>
+                <dga-nav-header-link label="{{ __('رحلتك الأكاديمية') }}"  id="lnl-journey"></dga-nav-header-link>
+                <dga-nav-header-link label="{{ __('مستقبلك المهني') }}"    id="lnl-career"></dga-nav-header-link>
             </dga-nav-header-menu>
         </dga-nav-header-main>
         <dga-nav-header-actions>
@@ -130,15 +130,29 @@
     </dga-nav-header>
 
     <script>
+    customElements.whenDefined('dga-nav-header-logos').then(function () {
+        function shrinkLogo() {
+            document.querySelectorAll('dga-nav-header-logos').forEach(function (el) {
+                if (el.shadowRoot && !el.shadowRoot.querySelector('style[data-kanaf-logo]')) {
+                    var s = document.createElement('style');
+                    s.setAttribute('data-kanaf-logo', '1');
+                    s.textContent = '.header__logo img { height: 32px !important; width: auto !important; }';
+                    el.shadowRoot.appendChild(s);
+                }
+            });
+        }
+        requestAnimationFrame(shrinkLogo);
+        setTimeout(shrinkLogo, 400);
+    });
     document.addEventListener('DOMContentLoaded', function () {
         function goTo(id, url) {
             var el = document.getElementById(id);
             if (el) el.addEventListener('click', function () { window.location.href = url; });
         }
-        goTo('lnl-home',     '{{ route('landing') }}');
-        goTo('lnl-about',    '{{ route('landing') }}');
-        goTo('lnl-services', '{{ route('landing') }}');
-        goTo('lnl-login',    '{{ route('login') }}');
+        goTo('lnl-home',    '{{ route('landing') }}');
+        goTo('lnl-journey', '{{ route('login') }}');
+        goTo('lnl-career',  '{{ route('login') }}');
+        goTo('lnl-login',   '{{ route('login') }}');
         var langBtn = document.getElementById('lnl-lang');
         if (langBtn) langBtn.addEventListener('click', function () {
             window.location.href = '{{ route('locale', app()->getLocale() === 'ar' ? 'en' : 'ar') }}';
@@ -304,11 +318,13 @@
         f.copyright        = 'جميع الحقوق محفوظة لهيئة الحكومة الرقمية © 2026';
         f.groupLinks = [
             { title: 'المنصة', links: [
-                { name: 'رحلتك الأكاديمية', target: '#' },
-                { name: 'مستقبلك المهني',   target: '#' },
+                { name: 'عن المنصة',         target: '{{ route("landing") }}#about' },
+                { name: 'خدماتنا',           target: '{{ route("landing") }}#services' },
+                { name: 'المقالات والأخبار', target: '{{ route("landing") }}#articles' },
             ]},
             { title: 'الدعم', links: [
                 { name: 'خريطة الموقع', target: '#' },
+                { name: 'RSS',           target: '#' },
                 { name: 'تطبيق الجوال', target: '#' },
             ]},
         ];

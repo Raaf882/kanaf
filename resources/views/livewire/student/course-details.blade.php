@@ -70,30 +70,30 @@
         <aside class="lg:col-span-1 order-2 lg:order-1">
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-5 sticky top-24">
 
-                <h3 class="font-black text-gray-800 text-center text-base border-b border-gray-100 pb-3">تحليل الأداء</h3>
+                <h3 class="font-black text-gray-800 text-center text-lg border-b border-gray-100 pb-3">تحليل الأداء</h3>
 
                 {{-- Theory --}}
                 <div>
-                    <p class="text-xs font-black text-gray-500 mb-2.5 text-right">درجات المادة النظرية</p>
+                    <p class="text-sm font-black text-gray-500 mb-2.5 text-right">درجات المادة النظرية</p>
                     <ul class="space-y-1.5 text-sm text-gray-700">
                         <li class="flex justify-between items-center">
-                            <span class="text-gray-400 text-xs font-semibold">{{ $enrollment->quiz1_theory }} من 4</span>
+                            <span class="text-gray-400 text-sm font-semibold">{{ $enrollment->quiz1_theory }} من 4</span>
                             <span>درجة كويز الفترة الأولى</span>
                         </li>
                         <li class="flex justify-between items-center">
-                            <span class="text-gray-400 text-xs font-semibold">{{ $enrollment->quiz2_theory }} من 4</span>
+                            <span class="text-gray-400 text-sm font-semibold">{{ $enrollment->quiz2_theory }} من 4</span>
                             <span>درجة كويز الفترة الثاني</span>
                         </li>
                         <li class="flex justify-between items-center">
-                            <span class="text-gray-400 text-xs font-semibold">{{ $enrollment->quiz3_theory }} من 4</span>
+                            <span class="text-gray-400 text-sm font-semibold">{{ $enrollment->quiz3_theory }} من 4</span>
                             <span>درجة كويز الفترة الثالث</span>
                         </li>
                         <li class="flex justify-between items-center">
-                            <span class="text-gray-400 text-xs font-semibold">{{ $enrollment->mid_theory }} من 20</span>
+                            <span class="text-gray-400 text-sm font-semibold">{{ $enrollment->mid_theory }} من 20</span>
                             <span>درجة اختبار الفترة الأول</span>
                         </li>
                         <li class="flex justify-between items-center">
-                            <span class="text-gray-400 text-xs font-semibold">
+                            <span class="text-gray-400 text-sm font-semibold">
                                 {{ $enrollment->final_theory > 0 ? $enrollment->final_theory.' من 20' : '—' }}
                             </span>
                             <span>درجة اختبار الفترة الثاني</span>
@@ -105,28 +105,28 @@
 
                 {{-- Practical --}}
                 <div>
-                    <p class="text-xs font-black text-gray-500 mb-2.5 text-right">درجات المادة العملية</p>
+                    <p class="text-sm font-black text-gray-500 mb-2.5 text-right">درجات المادة العملية</p>
                     <ul class="space-y-1.5 text-sm text-gray-700">
                         <li class="flex justify-between items-center">
-                            <span class="text-gray-400 text-xs font-semibold">{{ $enrollment->quiz1_practical }} من 4</span>
+                            <span class="text-gray-400 text-sm font-semibold">{{ $enrollment->quiz1_practical }} من 4</span>
                             <span>درجة كويز الفترة الأولى</span>
                         </li>
                         <li class="flex justify-between items-center">
-                            <span class="text-gray-400 text-xs font-semibold">{{ $enrollment->quiz2_practical }} من 4</span>
+                            <span class="text-gray-400 text-sm font-semibold">{{ $enrollment->quiz2_practical }} من 4</span>
                             <span>درجة كويز الفترة الثاني</span>
                         </li>
                         <li class="flex justify-between items-center">
-                            <span class="text-gray-400 text-xs font-semibold">{{ $enrollment->quiz3_practical }} من 4</span>
+                            <span class="text-gray-400 text-sm font-semibold">{{ $enrollment->quiz3_practical }} من 4</span>
                             <span>درجة كويز الفترة الثالث</span>
                         </li>
                         <li class="flex justify-between items-center">
-                            <span class="text-gray-400 text-xs font-semibold">
+                            <span class="text-gray-400 text-sm font-semibold">
                                 {{ $enrollment->mid_practical > 0 ? $enrollment->mid_practical : '—' }}
                             </span>
                             <span>درجة اختبار الفترة الأول</span>
                         </li>
                         <li class="flex justify-between items-center">
-                            <span class="text-gray-400 text-xs font-semibold">
+                            <span class="text-gray-400 text-sm font-semibold">
                                 {{ $enrollment->final_practical > 0 ? $enrollment->final_practical : '—' }}
                             </span>
                             <span>درجة اختبار الفترة الثاني</span>
@@ -137,10 +137,10 @@
                 <hr class="border-gray-100">
 
                 <div class="text-center py-1">
-                    <span class="text-xs text-gray-400 font-semibold">مجموع الدرجات الحالية</span>
-                    <div class="text-2xl font-black text-gray-900 mt-1">
+                    <span class="text-sm text-gray-400 font-semibold">مجموع الدرجات الحالية</span>
+                    <div class="text-3xl font-black text-gray-900 mt-1">
                         {{ $enrollment->total_score }}
-                        <span class="text-sm text-gray-400 font-semibold">من 100</span>
+                        <span class="text-base text-gray-400 font-semibold">من 100</span>
                     </div>
                 </div>
             </div>
@@ -216,7 +216,7 @@
                         </svg>
                     </div>
                     <p class="text-3xl font-black text-gray-900">{{ $completedTestsPct }}%</p>
-                    <p class="text-xs text-gray-400 mt-1 font-semibold">نسبة الاختبارات المنجزة</p>
+                    <p class="text-sm text-gray-400 mt-1 font-semibold">نسبة الاختبارات المنجزة</p>
                 </div>
 
                 {{-- Assignments --}}
@@ -228,9 +228,9 @@
                     </div>
                     <p class="text-3xl font-black text-gray-900">
                         {{ $completedAssignments }}
-                        <span class="text-lg text-gray-400">من{{ $totalAssignments }}</span>
+                        <span class="text-xl text-gray-400">من{{ $totalAssignments }}</span>
                     </p>
-                    <p class="text-xs text-gray-400 mt-1 font-semibold">عدد الواجبات المنجزة</p>
+                    <p class="text-sm text-gray-400 mt-1 font-semibold">عدد الواجبات المنجزة</p>
                 </div>
 
                 {{-- Absence --}}
@@ -241,23 +241,23 @@
                         </svg>
                     </div>
                     <p class="text-3xl font-black text-gray-900">{{ $absenceRate }}%</p>
-                    <p class="text-xs text-gray-400 mt-1 font-semibold">نسبة الغياب في المادة</p>
+                    <p class="text-sm text-gray-400 mt-1 font-semibold">نسبة الغياب في المادة</p>
                 </div>
             </div>
 
             {{-- Performance Analysis text --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-right space-y-3">
-                <h2 class="text-lg font-black text-gray-900">تحليل الأداء</h2>
+                <h2 class="text-xl font-black text-gray-900">تحليل الأداء</h2>
                 @if($score >= 80)
-                    <p class="text-green-700 text-sm leading-relaxed font-medium">
+                    <p class="text-green-700 text-base leading-relaxed font-medium">
                         أداؤك في هذه المادة ممتاز! استمر في هذا المستوى للحفاظ على نتيجتك النهائية.
                     </p>
                 @elseif($score >= 55)
-                    <p class="text-amber-700 text-sm leading-relaxed font-medium">
+                    <p class="text-amber-700 text-base leading-relaxed font-medium">
                         يُلاحظ وجود انخفاض في نتائج التقييمات الأخيرة مع انخفاض في نسبة الحضور، مما قد يؤثر على النتيجة النهائية للمادة.
                     </p>
                 @else
-                    <p class="text-red-700 text-sm leading-relaxed font-medium">
+                    <p class="text-red-700 text-base leading-relaxed font-medium">
                         يُلاحظ وجود انخفاض ملحوظ في الدرجات مع ارتفاع في نسبة الغياب. يُنصح بالتواصل مع المرشد الأكاديمي فوراً لوضع خطة تحسين.
                     </p>
                 @endif
@@ -265,7 +265,7 @@
 
             {{-- ══ كنف Options ══ --}}
             <div>
-                <h2 class="text-lg font-black text-gray-900 mb-4 text-right">كيف يمكن لكَـنَـف مساعدتك؟</h2>
+                <h2 class="text-xl font-black text-gray-900 mb-4 text-right">كيف يمكن لكَـنَـف مساعدتك؟</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
@@ -280,9 +280,9 @@
                         <div class="p-5 space-y-3">
                             <div class="text-center">
                                 <div class="text-2xl mb-1">📚</div>
-                                <h3 class="font-black text-gray-900 text-sm">كنف التعليم</h3>
+                                <h3 class="font-black text-gray-900 text-base">كنف التعليم</h3>
                             </div>
-                            <p class="text-xs text-gray-500 text-center leading-relaxed">
+                            <p class="text-sm text-gray-500 text-center leading-relaxed">
                                 محتوى تعليمي مبسط يساعدك على فهم أسباب التعثر وتحسين مستواك الأكاديمي
                             </p>
                             <button wire:click="openModal('education')"
@@ -304,9 +304,9 @@
                         <div class="p-5 space-y-3">
                             <div class="text-center">
                                 <div class="text-2xl mb-1">🤝</div>
-                                <h3 class="font-black text-gray-900 text-sm">كنف الإرشاد</h3>
+                                <h3 class="font-black text-gray-900 text-base">كنف الإرشاد</h3>
                             </div>
-                            <p class="text-xs text-gray-500 text-center leading-relaxed">
+                            <p class="text-sm text-gray-500 text-center leading-relaxed">
                                 تواصل مع مرشد أكاديمي للحصول على خطة موجهة تناسب حالتك
                             </p>
                             <button wire:click="openModal('guidance')"
@@ -328,9 +328,9 @@
                         <div class="p-5 space-y-3">
                             <div class="text-center">
                                 <div class="text-2xl mb-1">🧭</div>
-                                <h3 class="font-black text-gray-900 text-sm">كنف القرار</h3>
+                                <h3 class="font-black text-gray-900 text-base">كنف القرار</h3>
                             </div>
-                            <p class="text-xs text-gray-500 text-center leading-relaxed">
+                            <p class="text-sm text-gray-500 text-center leading-relaxed">
                                 استعرض أثر قراراتك الأكاديمية مثل الانسحاب أو الاستمرار
                             </p>
                             <button wire:click="openModal('decision')"

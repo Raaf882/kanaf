@@ -24,10 +24,10 @@
                 </svg>
             </div>
             <div>
-                <h1 style="font-size:1.6rem; font-weight:900; margin:0;">{{ $careerPath->name }}</h1>
+                <h1 style="font-size:1.8rem; font-weight:900; margin:0;">{{ $careerPath->name }}</h1>
             </div>
         </div>
-        <p style="font-size:0.9rem; opacity:0.85; max-width:620px; line-height:1.7;">{{ $careerPath->description }}</p>
+        <p style="font-size:1rem; opacity:0.85; max-width:620px; line-height:1.7;">{{ $careerPath->description }}</p>
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
             <button wire:click="toggleSave"
                     style="background:rgba(255,255,255,0.2); border:1.5px solid rgba(255,255,255,0.4); border-radius:20px; padding:6px 16px; color:#fff; font-size:0.85rem; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px;">
@@ -48,7 +48,7 @@
                 {{-- Work fields --}}
                 <div>
                     <div class="flex items-center gap-2 mb-3 flex-row-reverse justify-end">
-                        <h3 class="font-black text-gray-800 text-sm">مجالات العمل</h3>
+                        <h3 class="font-black text-gray-800 text-base">مجالات العمل</h3>
                         <svg class="w-4 h-4 text-[#1A6B3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
@@ -56,7 +56,7 @@
                     </div>
                     <ul class="space-y-1.5 text-right">
                         @foreach($careerPath->work_fields ?? [] as $field)
-                        <li class="text-sm text-gray-600">{{ $field }}</li>
+                        <li class="text-base text-gray-600">{{ $field }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -66,14 +66,14 @@
                 {{-- Certifications --}}
                 <div>
                     <div class="flex items-center gap-2 mb-3 flex-row-reverse justify-end">
-                        <h3 class="font-black text-gray-800 text-sm">الشهادات الأحترافية المقترحة:</h3>
+                        <h3 class="font-black text-gray-800 text-base">الشهادات الأحترافية المقترحة:</h3>
                         <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
                         </svg>
                     </div>
                     <ul class="space-y-1.5 text-right">
                         @foreach($careerPath->certifications as $cert)
-                        <li class="text-sm text-gray-600">{{ $cert->name }}</li>
+                        <li class="text-base text-gray-600">{{ $cert->name }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -94,10 +94,10 @@
 
             {{-- Core skills --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-right">
-                <h2 class="font-black text-gray-900 mb-4">المهارات الأساسية:</h2>
+                <h2 class="font-black text-gray-900 text-xl mb-4">المهارات الأساسية:</h2>
                 <ul class="space-y-1.5">
                     @foreach($careerPath->core_skills ?? [] as $skill)
-                    <li class="text-sm text-gray-700 flex items-center gap-2 justify-end">
+                    <li class="text-base text-gray-700 flex items-center gap-2 justify-end">
                         <span>{{ $skill }}-</span>
                     </li>
                     @endforeach
@@ -121,11 +121,11 @@
                         {{-- Name --}}
                         <a href="{{ $expert->linkedin_url ?? '#' }}"
                            target="_blank"
-                           class="font-bold text-[#1A6B3C] text-sm hover:underline block mb-1">
+                           class="font-bold text-[#1A6B3C] text-base hover:underline block mb-1">
                             {{ $expert->name }}
                         </a>
                         {{-- Title & company --}}
-                        <p class="text-xs text-gray-500 mb-3">
+                        <p class="text-sm text-gray-500 mb-3">
                             {{ $expert->title }} — {{ $expert->company }}
                         </p>
                         {{-- LinkedIn --}}
@@ -149,7 +149,7 @@
                     <h3 class="font-black text-gray-800 text-center mb-4">الخطة المقترحة</h3>
                     <ol class="space-y-2.5 text-right">
                         @foreach($careerPath->suggested_plan as $i => $step)
-                        <li class="text-sm text-gray-700 flex items-start gap-2 justify-end">
+                        <li class="text-base text-gray-700 flex items-start gap-2 justify-end">
                             <span class="leading-relaxed">{{ $step }}</span>
                             <span class="font-black text-[#1A6B3C] flex-shrink-0">{{ $i + 1 }}.</span>
                         </li>

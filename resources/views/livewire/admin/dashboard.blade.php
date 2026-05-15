@@ -29,9 +29,9 @@
     {{-- ── Header ── --}}
     <div style="background:linear-gradient(135deg,#1A6B3C 0%,#2d8a54 100%); border-radius:20px; padding:24px 32px; color:#fff; display:flex; align-items:center; justify-content:space-between; margin-bottom:28px;">
         <div>
-            <p style="font-size:0.85rem; opacity:0.75; margin-bottom:4px;">{{ __('منصة كَـنَـف') }}</p>
-            <h1 style="font-size:1.6rem; font-weight:900; margin:0 0 4px;">{{ __('لوحة الإدارة') }}</h1>
-            <p style="font-size:0.85rem; opacity:0.85;">{{ __('إدارة شاملة لمنصة كَـنَـف') }}</p>
+            <p style="font-size:0.95rem; opacity:0.75; margin-bottom:4px;">{{ __('منصة كَـنَـف') }}</p>
+            <h1 style="font-size:1.8rem; font-weight:900; margin:0 0 4px;">{{ __('لوحة الإدارة') }}</h1>
+            <p style="font-size:0.95rem; opacity:0.85;">{{ __('إدارة شاملة لمنصة كَـنَـف') }}</p>
         </div>
         <div style="background:rgba(255,255,255,0.15); border-radius:12px; padding:6px 14px; font-size:0.8rem; font-family:monospace; font-weight:700;">
             Admin Panel
@@ -61,7 +61,7 @@
                 </svg>
             </div>
             <p class="text-2xl font-extrabold {{ $c['num'] }}">{{ $card['value'] }}</p>
-            <p class="text-xs text-gray-500 mt-0.5">{{ $card['label'] }}</p>
+            <p class="text-sm text-gray-500 mt-0.5">{{ $card['label'] }}</p>
         </button>
         @endforeach
     </div>
@@ -80,7 +80,7 @@
                     ['id'=>'career_paths', 'label'=>__('المسارات المهنية'),  'icon'=>'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z'],
                 ] as $sec)
                 <button wire:click="setSection('{{ $sec['id'] }}')"
-                        class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all text-right
+                        class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-base font-semibold transition-all text-right
                                {{ $activeSection === $sec['id'] ? 'bg-[#1A6B3C] text-white' : 'text-gray-600 hover:bg-gray-50' }}">
                     <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $sec['icon'] }}"/>
@@ -118,8 +118,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-bold text-gray-800 text-sm">إدارة الطلاب</p>
-                            <p class="text-xs text-gray-400">إضافة وتعديل وحذف</p>
+                            <p class="font-bold text-gray-800 text-base">إدارة الطلاب</p>
+                            <p class="text-sm text-gray-400">إضافة وتعديل وحذف</p>
                         </div>
                         <svg class="w-4 h-4 text-gray-300 mr-auto rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -133,8 +133,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-bold text-gray-800 text-sm">إدارة المواد</p>
-                            <p class="text-xs text-gray-400">إضافة وتعديل وحذف</p>
+                            <p class="font-bold text-gray-800 text-base">إدارة المواد</p>
+                            <p class="text-sm text-gray-400">إضافة وتعديل وحذف</p>
                         </div>
                         <svg class="w-4 h-4 text-gray-300 mr-auto rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -148,8 +148,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-bold text-gray-800 text-sm">إدارة المرشدين</p>
-                            <p class="text-xs text-gray-400">إضافة وتعديل وحذف</p>
+                            <p class="font-bold text-gray-800 text-base">إدارة المرشدين</p>
+                            <p class="text-sm text-gray-400">إضافة وتعديل وحذف</p>
                         </div>
                         <svg class="w-4 h-4 text-gray-300 mr-auto rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -161,7 +161,7 @@
                     <h2 class="font-bold text-gray-800 mb-4">{{ __('أحدث الطلاب المسجلين') }}</h2>
                     <table class="w-full text-sm">
                         <thead>
-                            <tr class="text-gray-500 border-b border-gray-100 text-xs font-semibold">
+                            <tr class="text-gray-500 border-b border-gray-100 text-sm font-semibold">
                                 <th class="text-right pb-3">{{ __('الاسم') }}</th>
                                 <th class="text-right pb-3">{{ __('البريد') }}</th>
                                 <th class="text-right pb-3">{{ __('تاريخ التسجيل') }}</th>
@@ -222,7 +222,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
                         <thead>
-                            <tr class="text-gray-500 border-b border-gray-100 bg-gray-50 text-xs font-semibold">
+                            <tr class="text-gray-500 border-b border-gray-100 bg-gray-50 text-sm font-semibold">
                                 <th class="text-right px-5 py-3">{{ __('الاسم') }}</th>
                                 <th class="text-right px-5 py-3">{{ __('البريد') }}</th>
                                 <th class="text-right px-5 py-3">{{ __('التخصص') }}</th>
@@ -300,7 +300,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
                         <thead>
-                            <tr class="text-gray-500 border-b border-gray-100 bg-gray-50 text-xs font-semibold">
+                            <tr class="text-gray-500 border-b border-gray-100 bg-gray-50 text-sm font-semibold">
                                 <th class="text-right px-5 py-3">{{ __('الاسم') }}</th>
                                 <th class="text-right px-5 py-3">{{ __('البريد') }}</th>
                                 <th class="text-right px-5 py-3">{{ __('رقم الوظيفة') }}</th>
@@ -366,7 +366,7 @@
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm">
                         <thead>
-                            <tr class="text-gray-500 border-b border-gray-100 bg-gray-50 text-xs font-semibold">
+                            <tr class="text-gray-500 border-b border-gray-100 bg-gray-50 text-sm font-semibold">
                                 <th class="text-right px-5 py-3">{{ __('رمز المادة') }}</th>
                                 <th class="text-right px-5 py-3">{{ __('اسم المادة') }}</th>
                                 <th class="text-center px-5 py-3">{{ __('الساعات') }}</th>
