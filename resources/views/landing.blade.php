@@ -13,6 +13,17 @@
     <style>
         *, body { font-family: 'Cairo', sans-serif; }
 
+        /* ── Page wrapper — Figma spec ── */
+        #page-root {
+            display: flex;
+            width: 1440px;
+            max-width: 100%;          /* responsive fallback */
+            flex-direction: column;
+            align-items: flex-start;
+            margin-inline: auto;      /* centre on screens wider than 1440px */
+            overflow-x: hidden;
+        }
+
         /* ── Hero ── */
         .hero-section {
             background: #f8fafb;
@@ -96,6 +107,7 @@
     </style>
 </head>
 <body class="bg-white text-gray-900 overflow-x-hidden">
+<div id="page-root">
 
 {{-- ══════════════════════════════════════════
      GOVERNMENT BANNER
@@ -421,5 +433,6 @@ customElements.whenDefined('dga-footer').then(function () {
 });
 </script>
 
+</div>{{-- /page-root --}}
 </body>
 </html>
