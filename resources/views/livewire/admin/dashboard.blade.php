@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" x-data>
+<div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" dir="rtl" x-data>
 
     {{-- ── Toast Notification ── --}}
     @if($showToast)
@@ -27,12 +27,15 @@
     @endif
 
     {{-- ── Header ── --}}
-    <div class="flex items-center justify-between mb-8">
+    <div style="background:linear-gradient(135deg,#1A6B3C 0%,#2d8a54 100%); border-radius:20px; padding:24px 32px; color:#fff; display:flex; align-items:center; justify-content:space-between; margin-bottom:28px;">
         <div>
-            <h1 class="text-3xl font-extrabold text-gray-900">{{ __('لوحة الإدارة') }}</h1>
-            <p class="text-gray-500 text-sm mt-1">{{ __('إدارة شاملة لمنصة كَـنَـف') }}</p>
+            <p style="font-size:0.85rem; opacity:0.75; margin-bottom:4px;">{{ __('منصة كَـنَـف') }}</p>
+            <h1 style="font-size:1.6rem; font-weight:900; margin:0 0 4px;">{{ __('لوحة الإدارة') }}</h1>
+            <p style="font-size:0.85rem; opacity:0.85;">{{ __('إدارة شاملة لمنصة كَـنَـف') }}</p>
         </div>
-        <span class="text-xs text-gray-400 bg-gray-100 px-3 py-1.5 rounded-full font-mono">Admin Panel v2</span>
+        <div style="background:rgba(255,255,255,0.15); border-radius:12px; padding:6px 14px; font-size:0.8rem; font-family:monospace; font-weight:700;">
+            Admin Panel
+        </div>
     </div>
 
     {{-- ── Stats Cards ── --}}
@@ -104,6 +107,56 @@
             {{-- ──────── OVERVIEW ──────── --}}
             @if($activeSection === 'overview')
             <div class="space-y-5">
+
+                {{-- Quick CRUD Links --}}
+                <div class="grid grid-cols-3 gap-4">
+                    <a href="{{ route('admin.students') }}"
+                       class="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-[#1A6B3C]/20 transition-all group">
+                        <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-100 transition-colors">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800 text-sm">إدارة الطلاب</p>
+                            <p class="text-xs text-gray-400">إضافة وتعديل وحذف</p>
+                        </div>
+                        <svg class="w-4 h-4 text-gray-300 mr-auto rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="{{ route('admin.subjects') }}"
+                       class="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-[#1A6B3C]/20 transition-all group">
+                        <div class="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-purple-100 transition-colors">
+                            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800 text-sm">إدارة المواد</p>
+                            <p class="text-xs text-gray-400">إضافة وتعديل وحذف</p>
+                        </div>
+                        <svg class="w-4 h-4 text-gray-300 mr-auto rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="{{ route('admin.advisors') }}"
+                       class="flex items-center gap-3 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm hover:shadow-md hover:border-[#1A6B3C]/20 transition-all group">
+                        <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-green-100 transition-colors">
+                            <svg class="w-5 h-5 text-[#1A6B3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800 text-sm">إدارة المرشدين</p>
+                            <p class="text-xs text-gray-400">إضافة وتعديل وحذف</p>
+                        </div>
+                        <svg class="w-4 h-4 text-gray-300 mr-auto rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                     <h2 class="font-bold text-gray-800 mb-4">{{ __('أحدث الطلاب المسجلين') }}</h2>
                     <table class="w-full text-sm">

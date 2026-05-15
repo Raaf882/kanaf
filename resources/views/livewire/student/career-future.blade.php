@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" dir="rtl">
 
     {{-- ══ TOAST ══ --}}
     @if($showToast)
@@ -19,49 +19,54 @@
     {{-- ══ BREADCRUMB ══ --}}
     <div class="flex items-center justify-between mb-6">
         <button onclick="history.back()"
-                class="text-gray-400 hover:text-gray-600 transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
             </svg>
         </button>
         <nav class="flex items-center gap-2 text-sm text-gray-400">
             <a href="{{ route('home') }}" class="hover:text-[#1A6B3C] transition-colors">الرئيسية</a>
-            <span>›</span>
+            <svg class="w-3 h-3 text-gray-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             <span class="text-gray-700 font-semibold">مستقبلك المهني</span>
         </nav>
     </div>
 
-    {{-- ══ HEADER ══ --}}
-    <div class="mb-8 text-right">
-        <h1 class="text-4xl font-black text-gray-900 mb-3">مستقبلك المهني</h1>
-
-        @if($this->isNewStudent)
-            <p class="text-gray-500 text-base">
-                تعرّف على الفرص والمسارات المهنية المطلوبة في سوق العمل السعودي بناءً على تخصصك.
-            </p>
-            {{-- Info note --}}
-            <div class="mt-4 flex items-start gap-2 text-right justify-end">
-                <p class="text-gray-700 text-sm leading-relaxed max-w-xl">
-                    اكتشافك المبكر للمسارات المهنية يساعدك على بناء مهاراتك وخبراتك بشكل أوضح خلال رحلتك الجامعية.
-                </p>
-                <span class="text-lg flex-shrink-0">📌</span>
-            </div>
-        @else
-            <p class="text-gray-500 text-base">
-                بناءً على أدائك الأكاديمي واهتماماتك، هذه مسارات مهنية مناسبة يمكنك استكشافها
-            </p>
-            {{-- How we chose notice --}}
-            <div class="mt-4 flex items-start gap-2 text-right justify-end">
-                <div class="text-right">
-                    <p class="text-gray-700 text-sm font-bold">كيف تم اختيار المسارات؟</p>
-                    <p class="text-gray-600 text-sm leading-relaxed max-w-xl mt-0.5">
-                        تم بناء هذه التوصيات اعتماداً على المواد التي يظهر فيها أداؤك مرتفع، بالإضافة إلى الأنماط العامة في تقدمك الأكاديمي
-                    </p>
-                </div>
-                <span class="text-lg flex-shrink-0">📌</span>
-            </div>
-        @endif
+    {{-- ══ HERO BANNER ══ --}}
+    <div style="background:linear-gradient(135deg,#1A6B3C 0%,#2d8a54 100%); border-radius:20px; padding:28px 32px; color:#fff; margin-bottom:32px; display:flex; align-items:center; gap:20px;">
+        <div style="width:56px; height:56px; background:rgba(255,255,255,0.15); border-radius:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg style="width:28px; height:28px; color:#fff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+        </div>
+        <div>
+            <h1 style="font-size:1.6rem; font-weight:900; margin:0 0 4px;">مستقبلك المهني</h1>
+            @if($this->isNewStudent)
+                <p style="font-size:0.9rem; opacity:0.85;">تعرّف على الفرص والمسارات المهنية المطلوبة في سوق العمل السعودي بناءً على تخصصك.</p>
+            @else
+                <p style="font-size:0.9rem; opacity:0.85;">بناءً على أدائك الأكاديمي واهتماماتك — هذه مسارات مهنية مناسبة يمكنك استكشافها.</p>
+            @endif
+        </div>
     </div>
+
+    {{-- ══ INFO NOTE ══ --}}
+    @if($this->isNewStudent)
+    <div class="flex items-start gap-3 bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6">
+        <span class="text-xl flex-shrink-0">📌</span>
+        <p class="text-gray-700 text-sm leading-relaxed">
+            اكتشافك المبكر للمسارات المهنية يساعدك على بناء مهاراتك وخبراتك بشكل أوضح خلال رحلتك الجامعية.
+        </p>
+    </div>
+    @else
+    <div class="flex items-start gap-3 bg-[#F0FAF4] border border-[#1A6B3C]/20 rounded-2xl p-4 mb-6">
+        <span class="text-xl flex-shrink-0">📌</span>
+        <div>
+            <p class="text-gray-700 text-sm font-bold mb-0.5">كيف تم اختيار المسارات؟</p>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                تم بناء هذه التوصيات اعتماداً على المواد التي يظهر فيها أداؤك مرتفع، بالإضافة إلى الأنماط العامة في تقدمك الأكاديمي.
+            </p>
+        </div>
+    </div>
+    @endif
 
     {{-- ══════════════════════════════════════════════════════
          NEW STUDENT VIEW — 2×2 grid, all paths, skills list

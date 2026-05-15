@@ -1,6 +1,9 @@
 <?php
 
 use App\Livewire\Admin\Dashboard as AdminDashboard;
+use App\Livewire\Admin\Students as AdminStudents;
+use App\Livewire\Admin\Subjects as AdminSubjects;
+use App\Livewire\Admin\Advisors as AdminAdvisors;
 use App\Livewire\Advisor\Dashboard as AdvisorDashboard;
 use App\Livewire\Student\Home as StudentHome;
 use App\Livewire\Student\CareerFuture;
@@ -66,5 +69,8 @@ Route::middleware(['auth', 'role:advisor'])->group(function () {
 
 // ── Admin ─────────────────────────────────────────────────────────
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin', AdminDashboard::class)->name('admin.dashboard');
+    Route::get('/admin',          AdminDashboard::class)->name('admin.dashboard');
+    Route::get('/admin/students', AdminStudents::class)->name('admin.students');
+    Route::get('/admin/subjects', AdminSubjects::class)->name('admin.subjects');
+    Route::get('/admin/advisors', AdminAdvisors::class)->name('admin.advisors');
 });

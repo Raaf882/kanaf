@@ -19,7 +19,7 @@
 
     {{-- Dropdown --}}
     @if($open)
-    <div class="absolute left-0 top-full mt-2 w-96 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden"
+    <div class="absolute right-0 top-full mt-2 w-96 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden"
          style="max-height: 480px; overflow-y: auto;">
 
         {{-- Header --}}

@@ -1,18 +1,42 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" dir="rtl">
 
     {{-- ══ BREADCRUMB + BACK ══ --}}
     <div class="flex items-center justify-between mb-6">
         <button onclick="history.back()"
-                class="text-gray-400 hover:text-gray-600 transition-colors">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
             </svg>
         </button>
         <nav class="flex items-center gap-2 text-sm text-gray-400">
             <a href="{{ route('career-future') }}" class="hover:text-[#1A6B3C] transition-colors">مستقبلك المهني</a>
-            <span>›</span>
+            <svg class="w-3 h-3 text-gray-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             <span class="text-gray-700 font-semibold">{{ $careerPath->name }}</span>
         </nav>
+    </div>
+
+    {{-- ══ PATH HERO ══ --}}
+    <div style="background:linear-gradient(135deg,#1A6B3C 0%,#2d8a54 100%); border-radius:20px; padding:28px 32px; color:#fff; margin-bottom:28px;">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:12px;">
+            <div style="width:48px; height:48px; background:rgba(255,255,255,0.15); border-radius:14px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg style="width:24px; height:24px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </div>
+            <div>
+                <h1 style="font-size:1.6rem; font-weight:900; margin:0;">{{ $careerPath->name }}</h1>
+            </div>
+        </div>
+        <p style="font-size:0.9rem; opacity:0.85; max-width:620px; line-height:1.7;">{{ $careerPath->description }}</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+            <button wire:click="toggleSave"
+                    style="background:rgba(255,255,255,0.2); border:1.5px solid rgba(255,255,255,0.4); border-radius:20px; padding:6px 16px; color:#fff; font-size:0.85rem; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px;">
+                <svg style="width:16px; height:16px;" fill="{{ $isSaved ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+                </svg>
+                {{ $isSaved ? '✓ محفوظ في المفضلة' : 'حفظ في المسارات المفضلة' }}
+            </button>
+        </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -59,12 +83,6 @@
 
         {{-- ══ MAIN CONTENT ══ --}}
         <main class="lg:col-span-3 order-1 lg:order-2 space-y-6">
-
-            {{-- Title & description --}}
-            <div class="text-right">
-                <h1 class="text-3xl font-black text-gray-900 mb-2">{{ $careerPath->name }}</h1>
-                <p class="text-gray-500 text-base leading-relaxed">{{ $careerPath->description }}</p>
-            </div>
 
             {{-- Why recommended --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-right space-y-2">
@@ -141,20 +159,6 @@
             </div>
             @endif
 
-            {{-- Save button --}}
-            <div>
-                <button wire:click="toggleSave"
-                        class="flex items-center gap-2 font-bold text-sm px-7 py-3 rounded-xl transition-all
-                               {{ $isSaved
-                                  ? 'bg-[#1A6B3C] text-white hover:bg-[#155e34] shadow-md'
-                                  : 'bg-[#1A6B3C] text-white hover:bg-[#155e34] shadow-md' }}">
-                    <svg class="w-4 h-4" fill="{{ $isSaved ? 'currentColor' : 'none' }}" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
-                    </svg>
-                    {{ $isSaved ? '✓ تم الحفظ في المسارات المفضلة' : 'حفظ في المسارات المفضلة' }}
-                </button>
-            </div>
 
         </main>
     </div>

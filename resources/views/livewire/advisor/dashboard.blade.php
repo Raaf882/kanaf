@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gray-50" x-data>
+<div x-data>
 
 {{-- ══ TOAST ══ --}}
 @if($showToast)
@@ -19,40 +19,28 @@
 </div>
 @endif
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+<div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" class="space-y-10">
 
 {{-- ══════════════════════════════════════════
      SECTION 1: HEADER + ADVISOR INFO
 ══════════════════════════════════════════ --}}
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-
-    {{-- Title --}}
-    <div class="lg:col-span-2 text-right">
-        <h1 class="text-3xl font-black text-gray-900 mb-2">
-            أهلاً {{ auth()->user()->name }}
-        </h1>
-        <p class="text-gray-500 text-base">
-            وجودك يصنع فرقاً في رحلة الطلاب الأكاديمية، ابدأ بمتابعة طلابك اليوم.
-        </p>
-    </div>
-
-    {{-- Advisor info card --}}
-    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-right">
-        <h3 class="font-black text-gray-700 text-sm mb-3 pb-2 border-b border-gray-100">معلومات المرشد</h3>
-        <div class="space-y-2.5 text-sm">
-            <div>
-                <p class="text-xs text-gray-400 font-semibold">اسم الدكتور</p>
-                <p class="font-bold text-gray-800">{{ auth()->user()->name }}</p>
+<div dir="rtl">
+    {{-- Hero greeting --}}
+    <div style="background:linear-gradient(135deg,#1A6B3C 0%,#2d8a54 100%); border-radius:20px; padding:28px 32px; color:#fff; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+        <div>
+            <p style="font-size:0.9rem; opacity:0.8; margin-bottom:4px;">لوحة تحكم المرشد الأكاديمي</p>
+            <h1 style="font-size:1.7rem; font-weight:900; margin:0 0 4px;">أهلاً، {{ auth()->user()->first_name }} 👋</h1>
+            <p style="font-size:0.9rem; opacity:0.85;">وجودك يصنع فرقاً في رحلة الطلاب الأكاديمية.</p>
+        </div>
+        {{-- Advisor info chips --}}
+        <div style="display:flex; flex-direction:column; gap:8px; text-align:right; flex-shrink:0;">
+            <div style="background:rgba(255,255,255,0.15); border-radius:12px; padding:8px 16px; font-size:0.82rem;">
+                <span style="opacity:0.75;">الرقم الوظيفي:</span>
+                <span style="font-weight:700; margin-right:4px;">{{ auth()->user()->job_number ?? '4411111111' }}</span>
             </div>
-            <div>
-                <p class="text-xs text-gray-400 font-semibold">الرقم الوظيفي</p>
-                <p class="font-bold text-gray-800">{{ auth()->user()->job_number ?? '4411111111' }}</p>
-            </div>
-            <div>
-                <p class="text-xs text-gray-400 font-semibold">الكلية أو القسم</p>
-                <a href="#" class="font-bold text-[#1A6B3C] hover:underline">
-                    {{ auth()->user()->college ?? 'علوم حاسب' }}
-                </a>
+            <div style="background:rgba(255,255,255,0.15); border-radius:12px; padding:8px 16px; font-size:0.82rem;">
+                <span style="opacity:0.75;">الكلية:</span>
+                <span style="font-weight:700; margin-right:4px;">{{ auth()->user()->college ?? 'علوم حاسب' }}</span>
             </div>
         </div>
     </div>
@@ -61,7 +49,7 @@
 {{-- ══════════════════════════════════════════
      SECTION 2: ملخص اليوم
 ══════════════════════════════════════════ --}}
-<div>
+<div dir="rtl">
     <h2 class="text-xl font-black text-gray-900 mb-4 text-right">ملخص اليوم</h2>
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
 

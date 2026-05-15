@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" x-data>
+<div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" dir="rtl" x-data>
 
     {{-- ══════════════ TOAST ══════════════ --}}
     @if($showToast)
@@ -20,26 +20,50 @@
     {{-- ══════════════ BREADCRUMB + BACK ══════════════ --}}
     <div class="flex items-center justify-between mb-6">
         <button onclick="history.back()"
-                class="flex items-center gap-1.5 text-gray-400 hover:text-gray-700 transition-colors text-sm">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                class="w-9 h-9 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
             </svg>
         </button>
         <nav class="flex items-center gap-2 text-sm text-gray-400">
             <a href="{{ route('academic-journey') }}" class="hover:text-[#1A6B3C] transition-colors">رحلتك الأكاديمية</a>
-            <span>›</span>
+            <svg class="w-3 h-3 text-gray-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             <span class="text-gray-700 font-semibold">{{ $course->name }}</span>
-            <span>›</span>
-            <span class="text-gray-500">تفاصيل المادة</span>
         </nav>
     </div>
 
-    {{-- ══════════════ PAGE TITLE ══════════════ --}}
-    <h1 class="text-3xl font-black text-gray-900 mb-8 text-right">{{ $course->name }}</h1>
-
+    {{-- ══════════════ COURSE HERO CARD ══════════════ --}}
     @if($enrollment)
+    @php
+        $heroScore = $enrollment->total_score;
+        $heroBg = $heroScore >= 80 ? 'linear-gradient(135deg,#1A6B3C 0%,#2d8a54 100%)' :
+                  ($heroScore >= 55 ? 'linear-gradient(135deg,#92400e 0%,#b45309 100%)' :
+                   'linear-gradient(135deg,#991b1b 0%,#dc2626 100%)');
+    @endphp
+    <div style="background:{{ $heroBg }}; border-radius:20px; padding:28px 32px; color:#fff; margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+        <div>
+            <p class="text-sm opacity-80 mb-1">{{ $course->code }} · {{ $course->credits }} ساعات</p>
+            <h1 style="font-size:1.6rem; font-weight:900; margin:0 0 6px;">{{ $course->name }}</h1>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                <span style="background:rgba(255,255,255,0.2); border-radius:20px; padding:3px 12px; font-size:0.8rem; font-weight:700;">
+                    {{ $enrollment->performance_badge }}
+                </span>
+                @if($enrollment->course_level)
+                <span style="background:rgba(255,255,255,0.15); border-radius:20px; padding:3px 12px; font-size:0.8rem;">
+                    مستوى: {{ $enrollment->course_level }}
+                </span>
+                @endif
+            </div>
+        </div>
+        <div style="text-align:center;">
+            <div style="font-size:3rem; font-weight:900; line-height:1;">{{ $heroScore }}</div>
+            <div style="font-size:0.85rem; opacity:0.75;">من 100</div>
+        </div>
+    </div>
+    @endif
 
     {{-- ══════════════ MAIN GRID ══════════════ --}}
+    @if($enrollment)
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
 
         {{-- ── SIDEBAR: Grade Analysis ── --}}

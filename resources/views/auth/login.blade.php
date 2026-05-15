@@ -1,260 +1,351 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول — كَـنَـف</title>
+    <title>{{ __('تسجيل الدخول') }} — {{ __('كَـنَـف') }}</title>
 
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/kanaf-logo.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/kanaf-logo.png') }}">
-    <link rel="shortcut icon"                        href="{{ asset('images/kanaf-logo.png') }}">
-    <link rel="apple-touch-icon"                     href="{{ asset('images/kanaf-logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/kanaf-logo.png') }}">
+    <link rel="shortcut icon"         href="{{ asset('images/kanaf-logo.png') }}">
+    <link rel="apple-touch-icon"      href="{{ asset('images/kanaf-logo.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         body { font-family: 'Cairo', sans-serif; }
-        .kanaf-logo { font-family: 'Cairo', sans-serif; font-weight: 900; letter-spacing: 0.05em; }
-
-        .hero-bg {
-            background-image: url('/images/login-bg.jpg');
-            background-size: cover;
-            background-position: center;
-        }
-        .hero-bg-fallback {
-            background: linear-gradient(135deg,
-                #0d3d24 0%,
-                #1A6B3C 30%,
-                #2d8a54 55%,
-                #c8a876 80%,
-                #b8956a 100%);
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-        }
         input[type="password"]::-ms-reveal { display: none; }
+
+        @media (min-width: 1280px) { html { font-size: 17px; } }
+        @media (min-width: 1536px) { html { font-size: 18px; } }
+
+        .login-page { background: #f3f4f6; min-height: 100vh; display: flex; flex-direction: column; }
+
+        .login-hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 80px;
+        }
+        .login-inner {
+            max-width: 1440px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+        .login-card {
+            flex: 0 0 520px;
+            max-width: 520px;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 56px 48px;
+            box-shadow: 0 4px 40px rgba(0,0,0,.08);
+        }
+        .login-illustration {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 900px) {
+            .login-hero { padding: 40px 20px; }
+            .login-inner { flex-direction: column; gap: 32px; }
+            .login-card { flex: unset; max-width: 100%; }
+            .login-illustration { display: none; }
+        }
+
+        .form-input {
+            width: 100%;
+            border: 1.5px solid #e5e7eb;
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
+            transition: border-color .2s, box-shadow .2s;
+            text-align: right;
+            color: #111827;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #1A6B3C;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(26,107,60,.08);
+        }
+        .form-input.error { border-color: #ef4444; }
+
+        .btn-primary {
+            width: 100%;
+            background: #1A6B3C;
+            color: #fff;
+            font-weight: 800;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            padding: 14px 24px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            transition: background .2s, transform .15s;
+        }
+        .btn-primary:hover { background: #155e34; transform: translateY(-1px); }
+        .btn-primary:active { transform: translateY(0); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
+<div class="login-page">
 
-{{-- ═══ NAVBAR ════════════════════════════════════════════════════ --}}
-<nav class="bg-white/90 backdrop-blur border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
+    {{-- Government Banner --}}
+    <dga-second-nav-header>
+        <dga-second-nav-header-content>
+            <dga-second-nav-header-item label="{{ __('موقع حكومي رسمي مسجل لدى هيئة الحكومة الرقمية') }}">
+            </dga-second-nav-header-item>
+        </dga-second-nav-header-content>
+    </dga-second-nav-header>
 
-            {{-- Right: Logo + Nav --}}
-            <div class="flex items-center gap-8">
-                <a href="{{ route('root') }}" class="flex items-center gap-2.5">
-                    <img src="{{ asset('images/kanaf-logo.png') }}" alt="كَـنَـف"
-                         class="h-10 w-10 object-contain"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="h-10 w-10 rounded-full bg-[#1A6B3C] items-center justify-center hidden">
-                        <span class="kanaf-logo text-white text-[11px]">كَنَف</span>
+    {{-- Nav Header --}}
+    <dga-nav-header sticky="true" divider="true" full-width="true">
+        <dga-nav-header-main collapsed="true">
+            <dga-nav-header-logos
+                logo-src="{{ asset('images/kanaf-logo.png') }}"
+                logo-alt="{{ __('كَـنَـف') }}"
+                logo-link="{{ route('landing') }}"
+                gov-src="https://dga-nds-fbhtx.ondigitalocean.app/mobile-logo.svg"
+                gov-link="#">
+            </dga-nav-header-logos>
+            <dga-nav-header-menu>
+                <dga-nav-header-link label="{{ __('الرئيسية') }}"         id="lnl-home"></dga-nav-header-link>
+                <dga-nav-header-link label="{{ __('عن المنصة') }}"        id="lnl-about"></dga-nav-header-link>
+                <dga-nav-header-link label="{{ __('خدماتنا') }}"          id="lnl-services"></dga-nav-header-link>
+            </dga-nav-header-menu>
+        </dga-nav-header-main>
+        <dga-nav-header-actions>
+            <dga-header-action-btn id="lnl-lang"  label="{{ app()->getLocale() === 'ar' ? 'English' : 'عربي' }}" icon="translation"></dga-header-action-btn>
+            <dga-header-action-btn id="lnl-login" label="{{ __('تسجيل الدخول') }}" icon="user"></dga-header-action-btn>
+        </dga-nav-header-actions>
+    </dga-nav-header>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function goTo(id, url) {
+            var el = document.getElementById(id);
+            if (el) el.addEventListener('click', function () { window.location.href = url; });
+        }
+        goTo('lnl-home',     '{{ route('landing') }}');
+        goTo('lnl-about',    '{{ route('landing') }}');
+        goTo('lnl-services', '{{ route('landing') }}');
+        goTo('lnl-login',    '{{ route('login') }}');
+        var langBtn = document.getElementById('lnl-lang');
+        if (langBtn) langBtn.addEventListener('click', function () {
+            window.location.href = '{{ route('locale', app()->getLocale() === 'ar' ? 'en' : 'ar') }}';
+        });
+    });
+    </script>
+
+    {{-- Main content --}}
+    <div class="login-hero">
+        <div class="login-inner">
+
+            {{-- Login card (right side in RTL) --}}
+            <div class="login-card">
+
+                {{-- Header --}}
+                <div style="text-align:right; margin-bottom:32px;">
+                    <div style="display:flex; align-items:center; gap:12px; justify-content:flex-end; margin-bottom:16px;">
+                        <div>
+                            <h1 style="font-size:1.75rem; font-weight:900; color:#111827; margin:0; line-height:1.2;">
+                                {{ __('تسجيل الدخول') }}
+                            </h1>
+                            <p style="font-size:.9rem; color:#6b7280; margin-top:6px; line-height:1.6;">
+                                {{ __('لأن كل طالب يحتاج شخص يسانده، كَنَف هنا لدعم رحلتك') }}
+                            </p>
+                        </div>
+                        <div style="width:48px; height:48px; border-radius:14px; background:#e6f4ec; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                            <svg width="24" height="24" fill="none" stroke="#1A6B3C" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                        </div>
                     </div>
-                    <span class="kanaf-logo text-[#1A6B3C] text-xl tracking-wide hidden sm:block">كَـــنَـف</span>
-                </a>
 
-                <div class="hidden md:flex items-center gap-6">
-                    <a href="{{ route('root') }}" class="text-sm font-semibold text-[#1A6B3C] border-b-2 border-[#1A6B3C] pb-1">الرئيسية</a>
-                    <span class="text-sm font-semibold text-gray-400 cursor-default pb-1">رحلتك الأكاديمية</span>
-                    <span class="text-sm font-semibold text-gray-400 cursor-default pb-1">مستقبلك المهني</span>
-                </div>
-            </div>
-
-            {{-- Left: Search + Lang + Login --}}
-            <div class="flex items-center gap-3">
-                <button class="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-800 transition-colors px-3 py-2 rounded-xl hover:bg-gray-100">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                    </svg>
-                    <span class="hidden sm:inline text-xs font-semibold">البحث</span>
-                </button>
-
-                <button class="flex items-center gap-1 text-xs text-gray-600 border border-gray-300 rounded-lg px-3 py-1.5 hover:bg-gray-50 transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
-                    </svg>
-                    English
-                </button>
-
-                <a href="{{ route('login') }}"
-                   class="flex items-center gap-1.5 text-sm font-semibold text-gray-700 hover:text-[#1A6B3C] transition-colors">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-                    </svg>
-                    تسجيل الدخول
-                </a>
-            </div>
-        </div>
-    </div>
-</nav>
-
-{{-- ═══ HERO ═══════════════════════════════════════════════════════ --}}
-<main class="flex-1 relative hero-bg hero-bg-fallback">
-
-    {{-- Dark overlay for readability --}}
-    <div class="absolute inset-0 bg-black/20"></div>
-
-    {{-- Decorative floating elements (visible when no image) --}}
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-10 left-1/3 w-20 h-20 bg-white/5 rounded-2xl rotate-12 animate-pulse"></div>
-        <div class="absolute top-1/4 left-1/4 w-12 h-12 bg-[#1A6B3C]/20 rounded-xl rotate-45"></div>
-        <div class="absolute bottom-1/4 left-1/3 w-16 h-16 bg-white/5 rounded-full"></div>
-        <div class="absolute top-1/3 right-1/4 w-8 h-8 bg-white/10 rounded-lg rotate-12"></div>
-    </div>
-
-    <div class="relative z-10 min-h-[calc(100vh-64px)] flex items-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
-                {{-- Login card (right side in RTL) --}}
-                <div class="glass-card rounded-3xl shadow-2xl p-8 sm:p-10 w-full max-w-lg mx-auto lg:mx-0">
-
-                    <h1 class="text-3xl font-extrabold text-gray-900 mb-2">تسجيل الدخول</h1>
-                    <p class="text-sm text-gray-500 mb-8 leading-relaxed">
-                        لأن كل طالب يحتاج شخص يسانده ؛ كنف هنا لدعم رحلتك
-                    </p>
-
+                    {{-- Error message --}}
                     @if($errors->any())
-                        <div class="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3 mb-6">
-                            {{ $errors->first() }}
-                        </div>
+                    <div style="background:#fef2f2; border:1px solid #fca5a5; border-radius:12px; padding:12px 16px; margin-bottom:0; display:flex; align-items:flex-start; gap:10px;">
+                        <svg width="16" height="16" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0; margin-top:1px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <p style="font-size:.85rem; color:#dc2626; margin:0;">{{ $errors->first() }}</p>
+                    </div>
                     @endif
+                </div>
 
-                    <form method="POST" action="{{ route('login.post') }}" class="space-y-5">
-                        @csrf
+                {{-- Form --}}
+                <form method="POST" action="{{ route('login.post') }}" style="display:flex; flex-direction:column; gap:20px;">
+                    @csrf
 
-                        {{-- Email / username --}}
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2">
-                                اسم المستخدم او الايميل
-                            </label>
-                            <input type="email" name="email" value="{{ old('email') }}" required
-                                   placeholder="ادخل اسم المستخدم او الايميل الجامعي"
-                                   class="w-full border border-gray-200 bg-gray-50/60 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1A6B3C] focus:border-transparent placeholder-gray-400 transition-all">
-                        </div>
-
-                        {{-- Password --}}
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2">
-                                كلمة المرور
-                            </label>
-                            <div class="relative">
-                                <input id="password-input" type="password" name="password" required
-                                       placeholder="ادخل كلمة المرور"
-                                       class="w-full border border-gray-200 bg-gray-50/60 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1A6B3C] focus:border-transparent placeholder-gray-400 transition-all">
-                                <button type="button" onclick="togglePassword()"
-                                        class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#1A6B3C] transition-colors">
-                                    <svg id="eye-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                    </svg>
-                                    <svg id="eye-off-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-
-                        {{-- Submit --}}
-                        <button type="submit"
-                                class="w-full bg-[#1A6B3C] hover:bg-[#155C33] active:bg-[#0f4326] text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-[#1A6B3C]/20 hover:shadow-[#1A6B3C]/30 text-base mt-2">
-                            تسجيل الدخول
-                        </button>
-                    </form>
-
-                    {{-- Extra links --}}
-                    <div class="mt-6 pt-5 border-t border-gray-100 space-y-2">
-                        <button class="flex items-center gap-2 text-sm text-gray-600 hover:text-[#1A6B3C] transition-colors font-semibold w-full">
-                            <svg class="w-4 h-4 text-[#1A6B3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                            </svg>
-                            هل نسيت كلمة المرور؟
-                        </button>
-                        <button class="flex items-center gap-2 text-sm text-gray-600 hover:text-[#1A6B3C] transition-colors font-semibold w-full">
-                            <svg class="w-4 h-4 text-[#1A6B3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                            </svg>
-                            تغيير كلمة المرور
-                        </button>
+                    {{-- Email --}}
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <label style="font-size:.875rem; font-weight:700; color:#374151; text-align:right;">
+                            {{ __('اسم المستخدم أو البريد الإلكتروني') }}
+                        </label>
+                        <input type="email"
+                               name="email"
+                               value="{{ old('email') }}"
+                               required
+                               placeholder="{{ __('ادخل بريدك الإلكتروني الجامعي') }}"
+                               class="form-input {{ $errors->any() ? 'error' : '' }}"
+                               dir="ltr"
+                               style="text-align:right; direction:rtl;">
                     </div>
 
-                    {{-- Demo hint --}}
-                    <p class="text-center text-xs text-gray-400 mt-5">
-                        للتجربة:
-                        <span class="font-mono font-semibold text-gray-600">khalid@kanaf.sa</span>
-                        /
-                        <span class="font-mono font-semibold text-gray-600">password</span>
+                    {{-- Password --}}
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <label style="font-size:.875rem; font-weight:700; color:#374151; text-align:right;">
+                            {{ __('كلمة المرور') }}
+                        </label>
+                        <div style="position:relative;">
+                            <input id="password-input"
+                                   type="password"
+                                   name="password"
+                                   required
+                                   placeholder="••••••••"
+                                   class="form-input {{ $errors->any() ? 'error' : '' }}"
+                                   dir="ltr"
+                                   style="padding-left:48px;">
+                            <button type="button"
+                                    onclick="togglePassword()"
+                                    style="position:absolute; left:14px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#9ca3af; padding:2px;">
+                                <svg id="eye-on"  width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                                <svg id="eye-off" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    {{-- Submit --}}
+                    <button type="submit" class="btn-primary" style="margin-top:4px;">
+                        {{ __('تسجيل الدخول') }}
+                    </button>
+
+                    {{-- Divider --}}
+                    <div style="display:flex; align-items:center; gap:12px; margin-top:4px;">
+                        <div style="flex:1; height:1px; background:#e5e7eb;"></div>
+                        <span style="font-size:.8rem; color:#9ca3af; font-weight:600;">{{ __('أو') }}</span>
+                        <div style="flex:1; height:1px; background:#e5e7eb;"></div>
+                    </div>
+
+                    {{-- Helper links --}}
+                    <div style="display:flex; flex-direction:column; gap:8px; text-align:center;">
+                        <button type="button"
+                                style="background:none; border:none; cursor:pointer; font-size:.875rem; color:#1A6B3C; font-weight:700; font-family:'Cairo',sans-serif; text-decoration:underline; text-underline-offset:3px;">
+                            {{ __('نسيت كلمة المرور؟') }}
+                        </button>
+                        <button type="button"
+                                style="background:none; border:none; cursor:pointer; font-size:.875rem; color:#6b7280; font-weight:600; font-family:'Cairo',sans-serif;">
+                            {{ __('تغيير كلمة المرور') }}
+                        </button>
+                    </div>
+                </form>
+
+                {{-- Demo hint --}}
+                <div style="margin-top:24px; padding:12px 16px; background:#f9fafb; border-radius:12px; border:1px dashed #e5e7eb; text-align:center;">
+                    <p style="font-size:.75rem; color:#9ca3af; margin:0; line-height:1.6;">
+                        {{ __('للتجربة') }}:
+                        <span style="font-family:monospace; font-weight:700; color:#374151;">khalid@kanaf.sa</span>
+                        <span style="color:#d1d5db; margin:0 4px;">/</span>
+                        <span style="font-family:monospace; font-weight:700; color:#374151;">password</span>
                     </p>
                 </div>
+            </div>
 
-                {{-- 3D Illustration (left side in RTL = right visually) --}}
-                <div class="hidden lg:flex justify-center items-center">
-                    <img src="/images/login-hero.png"
-                         alt="كَـنَـف"
-                         class="w-full max-w-lg drop-shadow-2xl"
-                         onerror="this.style.display='none';">
+            {{-- Illustration (left side in RTL) --}}
+            <div class="login-illustration">
+                <div style="position:relative; text-align:center;">
+                    {{-- Decorative background circle --}}
+                    <div style="position:absolute; inset:-40px; border-radius:50%; background:radial-gradient(circle, rgba(26,107,60,.08) 0%, transparent 70%); pointer-events:none;"></div>
+
+                    <img src="{{ asset('images/kanaf2.png') }}"
+                         alt="{{ __('كَـنَـف') }}"
+                         style="max-height:420px; max-width:100%; object-fit:contain; position:relative; z-index:1; filter:drop-shadow(0 20px 40px rgba(26,107,60,.15));"
+                         onerror="this.parentElement.innerHTML='<div style=\'text-align:center\'><div style=\'font-size:6rem;font-weight:900;color:#1A6B3C;line-height:1;\'>كَـنَـف</div><p style=\'color:#9ca3af;font-size:.9rem;margin-top:12px;\'>منصة الإرشاد الأكاديمي</p></div>'">
+
+                    {{-- Feature chips under illustration --}}
+                    <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:32px; position:relative; z-index:1;">
+                        @foreach([__('تحليل الأداء'), __('إرشاد أكاديمي'), __('ذكاء اصطناعي'), __('مسارات مهنية')] as $chip)
+                        <span style="display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid #e5e7eb;
+                                     color:#374151; font-size:.8rem; font-weight:700; padding:6px 14px;
+                                     border-radius:100px; box-shadow:0 1px 4px rgba(0,0,0,.06);">
+                            <span style="width:6px; height:6px; border-radius:50%; background:#1A6B3C; flex-shrink:0;"></span>
+                            {{ $chip }}
+                        </span>
+                        @endforeach
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
-</main>
 
-{{-- ═══ FOOTER ═════════════════════════════════════════════════════ --}}
-<footer class="bg-white border-t border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-4">
-                <img src="{{ asset('images/kanaf-logo.png') }}" alt="كَـنَـف"
-                     class="h-12 w-12 object-contain"
-                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="h-12 w-12 rounded-full bg-[#1A6B3C] items-center justify-center hidden">
-                    <span class="kanaf-logo text-white text-sm">كَنَف</span>
-                </div>
-                <div class="h-12 w-12 bg-gray-800 rounded-lg flex items-center justify-center">
-                    <span class="text-white text-xs font-bold">سدايا</span>
-                </div>
-            </div>
-            <nav class="flex gap-6 text-sm text-gray-500">
-                <a href="#" class="hover:text-gray-800 transition-colors">خريطة الموقع</a>
-                <a href="#" class="hover:text-gray-800 transition-colors">RSS</a>
-                <a href="#" class="hover:text-gray-800 transition-colors">تطبيق الجوال</a>
-            </nav>
-        </div>
-        <div class="mt-6 text-center text-sm text-gray-500 space-y-1">
-            <p class="font-bold text-gray-700">جميع الحقوق محفوظة لهيئة الحوكمة الرقمية © 2026</p>
-            <p>تم تطويره وصيانته بواسطة كَـنَـف</p>
-            <p>تاريخ آخر تعديل: 04/12/2026</p>
-        </div>
-    </div>
-</footer>
+    {{-- Footer --}}
+    <dga-footer id="login-footer"></dga-footer>
+    <script>
+    customElements.whenDefined('dga-footer').then(function () {
+        var f = document.getElementById('login-footer');
+        if (!f) return;
+        f.background       = 'Light';
+        f.NavLinks         = true;
+        f.socialMediaTitle = 'وسائل التواصل الاجتماعي';
+        f.copyright        = 'جميع الحقوق محفوظة لهيئة الحكومة الرقمية © 2026';
+        f.groupLinks = [
+            { title: 'المنصة', links: [
+                { name: 'رحلتك الأكاديمية', target: '#' },
+                { name: 'مستقبلك المهني',   target: '#' },
+            ]},
+            { title: 'الدعم', links: [
+                { name: 'خريطة الموقع', target: '#' },
+                { name: 'تطبيق الجوال', target: '#' },
+            ]},
+        ];
+        f.socialMediaLinks = [
+            { title: 'تويتر',    target: '#', icon: { name: 'TwitterIcon',   variant: 'stroke' } },
+            { title: 'يوتيوب',   target: '#', icon: { name: 'YoutubeIcon',   variant: 'stroke' } },
+            { title: 'إنستغرام', target: '#', icon: { name: 'InstagramIcon', variant: 'stroke' } },
+        ];
+        f.basicLinks = [
+            { name: 'الرئيسية',      target: '{{ route("landing") }}' },
+            { name: 'تسجيل الدخول', target: '{{ route("login") }}' },
+        ];
+        f.extraLinks = [
+            { name: 'سياسة الخصوصية',   target: '#' },
+            { name: 'الشروط والأحكام', target: '#' },
+        ];
+        f.bottomImages = ['{{ asset("images/kanaf-logo.png") }}'];
+    });
+    </script>
+
+</div>{{-- /login-page --}}
 
 <script>
 function togglePassword() {
-    const input   = document.getElementById('password-input');
-    const eyeOn   = document.getElementById('eye-icon');
-    const eyeOff  = document.getElementById('eye-off-icon');
-    if (input.type === 'password') {
-        input.type  = 'text';
-        eyeOn.classList.add('hidden');
-        eyeOff.classList.remove('hidden');
+    var inp    = document.getElementById('password-input');
+    var eyeOn  = document.getElementById('eye-on');
+    var eyeOff = document.getElementById('eye-off');
+    if (inp.type === 'password') {
+        inp.type = 'text';
+        eyeOn.style.display  = 'none';
+        eyeOff.style.display = '';
     } else {
-        input.type  = 'password';
-        eyeOn.classList.remove('hidden');
-        eyeOff.classList.add('hidden');
+        inp.type = 'password';
+        eyeOn.style.display  = '';
+        eyeOff.style.display = 'none';
     }
 }
 </script>
-
 </body>
 </html>
