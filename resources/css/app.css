@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Cairo', ui-sans-serif, system-ui, sans-serif;
+    --color-kanaf-green:        #1A6B3C;
+    --color-kanaf-green-mid:    #2E8B57;
+    --color-kanaf-green-light:  #F0FAF4;
+    --color-kanaf-purple:       #6B21A8;
+    --color-kanaf-purple-light: #F5F0FF;
+}
