@@ -167,8 +167,6 @@
             padding-bottom: 80px;
         }
         .article-card {
-            flex-shrink: 0;
-            width: 320px;
             background: #ffffff;
             border-radius: 16px;
             overflow: hidden;
@@ -176,6 +174,7 @@
             display: flex;
             flex-direction: column;
             transition: transform .2s, box-shadow .2s;
+            min-width: 0;
         }
         .article-card:hover {
             transform: translateY(-4px);
@@ -496,7 +495,7 @@
                     </div>
                     <div>
                         <h3 style="font-size:1rem; font-weight:800; color:#111827; margin:0 0 8px;">{{ $svc['title'] }}</h3>
-                        <p style="font-size:.85rem; color:#6b7280; line-height:1.7; margin:0;">{{ $svc['desc'] }}</p>
+                        <p style="font-size:.85rem; color:#6b7280; line-height:1.7; margin:0; overflow-wrap:anywhere; word-break:break-word;">{{ $svc['desc'] }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -555,10 +554,10 @@
         ];
         @endphp
 
-        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($articles as $i => $article)
             @php $tc = $tagColors[$article['tag']] ?? ['bg'=>'#f3f4f6','color'=>'#374151']; @endphp
-            <div class="article-card" style="{{ $i === 3 ? 'grid-column: 3 / 4;' : '' }}">
+            <div class="article-card">
                 <div class="article-img">
                     <svg width="48" height="48" fill="none" stroke="#d1d5db" stroke-width="1" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
@@ -566,7 +565,7 @@
                 </div>
                 <div class="article-body">
                     <span class="tag-chip" style="background:{{ $tc['bg'] }}; color:{{ $tc['color'] }};">{{ $article['tag'] }}</span>
-                    <h3 style="font-size:.95rem; font-weight:800; color:#111827; line-height:1.6; margin:0;">
+                    <h3 style="font-size:.95rem; font-weight:800; color:#111827; line-height:1.6; margin:0; overflow-wrap:anywhere; word-break:break-word;">
                         {{ $article['title'] }}
                     </h3>
                     <div style="display:flex; align-items:center; gap:12px; margin-top:auto;">
@@ -585,7 +584,7 @@
 {{-- ══════════════════════════════════════════
      7. FOOTER
 ══════════════════════════════════════════ --}}
-<footer style="background:#1A6B3C; color:#fff; padding:36px 0;">
+<footer style="background:#1A6B3C; color:#fff; padding:24px 0;">
     <div style="max-width:1440px; width:100%; margin:0 auto; padding:0 80px;" dir="rtl">
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
             <a href="{{ route('landing') }}" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0;">

@@ -13,3 +13,34 @@
     --color-kanaf-purple:       #6B21A8;
     --color-kanaf-purple-light: #F5F0FF;
 }
+
+/* ── Global box-sizing & overflow protection ── */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+input,
+textarea,
+select,
+button {
+    max-width: 100%;
+}
+
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.break-safe {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}

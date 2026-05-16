@@ -151,7 +151,7 @@
     </main>
 
     {{-- =================== FOOTER =================== --}}
-    <footer style="background:#1A6B3C; color:#fff; padding:36px 0; margin-top:auto;">
+    <footer style="background:#1A6B3C; color:#fff; padding:24px 0; margin-top:auto;">
         <div style="max-width:1440px; width:100%; margin:0 auto; padding:0 80px;" dir="rtl">
             <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
                 <a href="{{ route('landing') }}" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0;">
