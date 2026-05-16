@@ -4,7 +4,6 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "build:vercel": "vite build && node scripts/vercel-post-build.js",
         "dev": "vite"
     },
     "devDependencies": {
