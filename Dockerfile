@@ -38,8 +38,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # Composer install
-RUN composer install --no-dev --optimize-autoloader --no-interaction
-
+RUN composer install --no-dev --optimize-autoloader --no-interaction --verbose
 # NPM build
 RUN npm install && npm run build
 
