@@ -3,7 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build && node scripts/vercel-post-build.js",
+        "build": "vite build",
+        "build:vercel": "vite build && node scripts/vercel-post-build.js",
         "dev": "vite"
     },
     "devDependencies": {
