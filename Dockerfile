@@ -34,7 +34,7 @@ WORKDIR /app
 COPY . .
 
 # Install Composer dependencies
-RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+RUN composer install --ignore-platform-reqs --no-dev --prefer-dist --no-interaction
 
 # Install frontend dependencies
 RUN npm install
