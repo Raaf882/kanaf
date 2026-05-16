@@ -1,27 +1,54 @@
-FROM php:8.2-fpm
+FROM php:8.2-cli
 
-# Install Node.js
+# System dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    libpq-dev \
+    zip \
+    unzip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# PHP extensions
+RUN docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    pdo_pgsql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    gd \
+    zip
+
+# Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs
-
-# Install PHP extensions
-RUN apt-get install -y libpng-dev libzip-dev zip unzip \
-    && docker-php-ext-install pdo pdo_mysql zip gd
-
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader
+# Composer install
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
+# NPM build
 RUN npm install && npm run build
 
-RUN chown -R www-data:www-data storage bootstrap/cache
+# Permissions
+RUN mkdir -p storage/logs storage/framework/sessions \
+    storage/framework/views storage/framework/cache \
+    bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
-# Copy and permission the startup script
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
