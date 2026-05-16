@@ -1,52 +1,30 @@
-FROM php:8.3-cli
+FROM php:8.2-fpm
 
-# System packages
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    unzip \
-    zip \
-    sqlite3 \
-    libsqlite3-dev \
-    libzip-dev \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    nodejs \
-    npm
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
-# PHP extensions
-RUN docker-php-ext-install \
-    pdo \
-    pdo_sqlite \
-    mbstring \
-    zip \
-    exif \
-    pcntl
+# Install PHP extensions
+RUN apt-get install -y libpng-dev libzip-dev zip unzip \
+    && docker-php-ext-install pdo pdo_mysql zip gd
 
-# Composer
+# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# App directory
-WORKDIR /app
+WORKDIR /var/www/html
 
-# Copy files
 COPY . .
 
-# Install Composer dependencies
-RUN composer install --ignore-platform-reqs --no-dev --prefer-dist --no-interaction
+RUN composer install --no-dev --optimize-autoloader
 
-# Install frontend dependencies
-RUN npm install
+RUN npm install && npm run build
 
-# Build assets
-RUN npm run build
+RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Permissions
-RUN chmod -R 775 storage bootstrap/cache database
+# Copy and permission the startup script
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 EXPOSE 10000
 
-CMD php artisan migrate --force && \
-    php artisan db:seed --force && \
-    php artisan serve --host=0.0.0.0 --port=${PORT:-10000}
+CMD ["/start.sh"]
