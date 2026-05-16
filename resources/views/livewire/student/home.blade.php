@@ -18,8 +18,8 @@
 
     {{-- ── Pending Nominations Banner ── --}}
     @if($this->pendingNominations->count() > 0)
-    <div style="background:#f3f8f5; border-bottom:1px solid #d1fae5; padding:0;">
-        <div style="max-width:1440px; width:100%; margin:0 auto; padding:16px 80px;" class="space-y-3" dir="rtl">
+    <div style="background:#f3f8f5; border-bottom:1px solid #d1fae5;">
+        <div class="page-container py-4 space-y-3" dir="rtl">
             @foreach($this->pendingNominations as $nom)
             <div class="bg-white border border-amber-200 rounded-2xl p-5 flex items-start gap-4 shadow-sm">
                 <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-2xl flex-shrink-0">
@@ -61,7 +61,7 @@
     @endif
 
     {{-- ── Page Content ── --}}
-    <div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" class="space-y-8" dir="rtl">
+    <div class="page-body space-y-8" dir="rtl">
 
         {{-- ══ 1. Hero greeting ══ --}}
         <div style="background:linear-gradient(135deg,#1A6B3C 0%,#2d8a54 100%); border-radius:20px; padding:32px 36px; color:#fff; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
@@ -228,6 +228,7 @@
         @if($this->enrollments->isNotEmpty())
         <div>
             <div class="flex items-center justify-between mb-5">
+                <h2 class="text-2xl font-black text-gray-900">مواد هذا الفصل</h2>
                 <a href="{{ route('academic-journey') }}"
                    class="text-sm font-bold text-[#1A6B3C] flex items-center gap-1.5 hover:underline">
                     عرض الكل
@@ -235,7 +236,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
                 </a>
-                <h2 class="text-2xl font-black text-gray-900">مواد هذا الفصل</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -320,6 +320,7 @@
         @if($this->savedPaths->isNotEmpty())
         <div>
             <div class="flex items-center justify-between mb-4">
+                <h2 class="text-2xl font-black text-gray-900">المسارات المفضلة</h2>
                 <a href="{{ route('career-future') }}"
                    class="text-sm font-bold text-[#1A6B3C] flex items-center gap-1.5 hover:underline">
                     عرض الكل
@@ -327,7 +328,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
                 </a>
-                <h2 class="text-2xl font-black text-gray-900">المسارات المفضلة</h2>
             </div>
             <p class="text-sm text-gray-400 text-right mb-5">المسارات التي قمت بحفظها لمتابعتها لاحقاً.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">

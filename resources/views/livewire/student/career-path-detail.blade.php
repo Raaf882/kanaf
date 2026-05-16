@@ -1,4 +1,4 @@
-<div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" dir="rtl">
+<div class="page-body" dir="rtl">
 
     {{-- ══ BREADCRUMB + BACK ══ --}}
     <div class="flex items-center justify-between mb-6">
@@ -98,7 +98,8 @@
                 <ul class="space-y-1.5">
                     @foreach($careerPath->core_skills ?? [] as $skill)
                     <li class="text-base text-gray-700 flex items-center gap-2 justify-end">
-                        <span>{{ $skill }}-</span>
+                        <span>{{ $skill }}</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#1A6B3C] flex-shrink-0"></span>
                     </li>
                     @endforeach
                 </ul>

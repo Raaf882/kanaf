@@ -1,4 +1,4 @@
-<div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" dir="rtl" x-data>
+<div class="page-body" dir="rtl" x-data>
 
     {{-- Toast --}}
     @if($showToast)
@@ -58,7 +58,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
         </svg>
         <input wire:model.live.debounce.300ms="search" type="text" placeholder="بحث برمز المادة أو الاسم أو الوصف..."
-               class="w-full pr-10 pl-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1A6B3C] bg-white">
+               class="w-full pe-10 ps-4 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1A6B3C] bg-white">
     </div>
 
     {{-- Table --}}
@@ -68,7 +68,7 @@
                 إجمالي المواد: <span class="font-bold text-gray-800">{{ $subjects->total() }}</span>
             </p>
         </div>
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto" style="scroll-padding-inline-start:16px;">
             <table class="w-full text-sm">
                 <thead>
                     <tr class="text-gray-500 border-b border-gray-100 bg-gray-50 text-sm font-semibold">

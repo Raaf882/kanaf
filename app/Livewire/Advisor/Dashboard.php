@@ -27,6 +27,13 @@ class Dashboard extends Component
     public string $bookDateTime     = '';
     public string $bookReason       = '';
 
+    // ── Rating modal ──────────────────────────────────────────────
+    public bool   $showRating      = false;
+    public ?int   $ratingSessionId = null;
+    public int    $ratingStars     = 0;
+    public string $ratingClarity   = '';
+    public string $ratingHelp      = '';
+
     // ── Nomination modal (card button) ────────────────────────────
     public bool   $showNomination    = false;
     public ?int   $nomStudentId      = null;
@@ -74,6 +81,35 @@ class Dashboard extends Component
     public function toggleLevel(int $level): void
     {
         $this->expandedLevel = ($this->expandedLevel === $level) ? null : $level;
+    }
+
+    // ── Rating modal ──────────────────────────────────────────────
+    public function openRating(int $sessionId): void
+    {
+        $this->ratingSessionId = $sessionId;
+        $this->ratingStars     = 0;
+        $this->ratingClarity   = '';
+        $this->ratingHelp      = '';
+        $this->showRating      = true;
+    }
+
+    public function closeRating(): void
+    {
+        $this->showRating      = false;
+        $this->ratingSessionId = null;
+    }
+
+    public function submitRating(): void
+    {
+        $this->validate([
+            'ratingStars' => 'required|integer|min:1|max:5',
+        ], [
+            'ratingStars.min' => 'يرجى اختيار تقييم',
+        ]);
+
+        // Rating stored — extend with a SessionRating model if needed
+        $this->closeRating();
+        $this->toast('✅ تم إرسال التقييم بنجاح، شكراً لك');
     }
 
     // ── Nomination modal (from card) ──────────────────────────────

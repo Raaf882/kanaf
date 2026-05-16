@@ -13,6 +13,14 @@
     <style>
         *, body { font-family: 'Cairo', sans-serif; }
 
+        /* ── Nav / Footer hover ── */
+        .kanaf-nav-link:hover    { color: #1A6B3C !important; }
+        .kanaf-footer-link:hover { color: #ffffff !important; }
+        @media (max-width: 768px) {
+            .kanaf-nav-links { display: none !important; }
+            .kanaf-nav-inner { padding: 0 20px !important; }
+        }
+
         /* ── Page wrapper — Figma spec: 1440px flex column ── */
         #page-root {
             display: flex;
@@ -230,77 +238,41 @@
 <div id="page-root">
 
 {{-- ══════════════════════════════════════════
-     1. GOVERNMENT BANNER (Digital Stamp)
+     1. NAVBAR
 ══════════════════════════════════════════ --}}
-<dga-second-nav-header>
-    <dga-second-nav-header-content>
-        <dga-second-nav-header-item label="موقع حكومي رسمي مسجل لدى هيئة الحكومة الرقمية">
-        </dga-second-nav-header-item>
-    </dga-second-nav-header-content>
-</dga-second-nav-header>
+<nav style="background:#ffffff; border-bottom:1.5px solid #e5e7eb; position:sticky; top:0; z-index:50; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+    <div class="kanaf-nav-inner" style="max-width:1440px; width:100%; margin:0 auto; padding:0 80px; height:64px; display:flex; align-items:center; justify-content:space-between;" dir="rtl">
 
-{{-- ══════════════════════════════════════════
-     2. NAV HEADER
-══════════════════════════════════════════ --}}
-<dga-nav-header sticky="true" divider="true" full-width="true">
-    <dga-nav-header-main collapsed="true">
-        <dga-nav-header-logos
-            logo-src="{{ asset('images/kanaf-logo.png') }}"
-            logo-alt="كَنَف"
-            logo-link="{{ route('landing') }}"
-            gov-src="https://dga-nds-fbhtx.ondigitalocean.app/mobile-logo.svg"
-            gov-link="#">
-        </dga-nav-header-logos>
-        <dga-nav-header-menu>
-            <dga-nav-header-link label="الرئيسية"          id="ln-home"></dga-nav-header-link>
-            <dga-nav-header-link label="عن المنصة"         id="ln-about"></dga-nav-header-link>
-            <dga-nav-header-link label="خدماتنا"           id="ln-services"></dga-nav-header-link>
-            <dga-nav-header-link label="المقالات"          id="ln-articles"></dga-nav-header-link>
-        </dga-nav-header-menu>
-    </dga-nav-header-main>
-    <dga-nav-header-actions>
-        <dga-header-action-btn id="ln-lang"  label="English"       icon="translation"></dga-header-action-btn>
-        <dga-header-action-btn id="ln-login" label="تسجيل الدخول" icon="user"></dga-header-action-btn>
-    </dga-nav-header-actions>
-</dga-nav-header>
+        {{-- Logo --}}
+        <a href="{{ route('landing') }}" style="display:flex; align-items:center; gap:10px; text-decoration:none; flex-shrink:0;">
+            <img src="{{ asset('images/kanaf-logo.png') }}" alt="كَنَف" style="height:34px; width:auto;">
+            <span style="font-size:1.2rem; font-weight:900; color:#1A6B3C;">كَـنَـف</span>
+        </a>
 
-<script>
-customElements.whenDefined('dga-nav-header-logos').then(function () {
-    function shrinkLogo() {
-        document.querySelectorAll('dga-nav-header-logos').forEach(function (el) {
-            if (el.shadowRoot) {
-                if (!el.shadowRoot.querySelector('style[data-kanaf-logo]')) {
-                    var s = document.createElement('style');
-                    s.setAttribute('data-kanaf-logo', '1');
-                    s.textContent = '.header__logo img { height: 32px !important; width: auto !important; }';
-                    el.shadowRoot.appendChild(s);
-                }
-            }
-        });
-    }
-    requestAnimationFrame(shrinkLogo);
-    setTimeout(shrinkLogo, 400);
-});
-document.addEventListener('DOMContentLoaded', function () {
-    function goTo(id, url) {
-        var el = document.getElementById(id);
-        if (el) el.addEventListener('click', function () { window.location.href = url; });
-    }
-    function scrollTo(id, anchor) {
-        var el = document.getElementById(id);
-        if (el) el.addEventListener('click', function () {
-            var t = document.querySelector(anchor);
-            if (t) t.scrollIntoView({ behavior: 'smooth' });
-        });
-    }
-    goTo('ln-home',    '{{ route("landing") }}');
-    scrollTo('ln-about',    '#about');
-    scrollTo('ln-services', '#services');
-    scrollTo('ln-articles', '#articles');
-    goTo('ln-lang',  '{{ route("locale", app()->getLocale() === "ar" ? "en" : "ar") }}');
-    goTo('ln-login', '{{ route("login") }}');
-});
-</script>
+        {{-- Nav links --}}
+        <div class="kanaf-nav-links" style="display:flex; align-items:center; gap:28px;">
+            <a href="{{ route('landing') }}"          class="kanaf-nav-link" style="color:#374151; font-weight:600; text-decoration:none; font-size:0.92rem; transition:color .15s;">الرئيسية</a>
+            <a href="{{ route('landing') }}#about"    class="kanaf-nav-link" style="color:#374151; font-weight:600; text-decoration:none; font-size:0.92rem; transition:color .15s;">عن المنصة</a>
+            <a href="{{ route('landing') }}#services" class="kanaf-nav-link" style="color:#374151; font-weight:600; text-decoration:none; font-size:0.92rem; transition:color .15s;">خدماتنا</a>
+            <a href="{{ route('landing') }}#articles" class="kanaf-nav-link" style="color:#374151; font-weight:600; text-decoration:none; font-size:0.92rem; transition:color .15s;">المقالات</a>
+        </div>
+
+        {{-- Language toggle + Login --}}
+        <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
+            <a href="{{ route('locale', app()->getLocale() === 'ar' ? 'en' : 'ar') }}"
+               title="{{ app()->getLocale() === 'ar' ? 'Switch to English' : 'التبديل للعربية' }}"
+               style="display:flex; align-items:center; gap:5px; color:#374151; font-weight:700; font-size:0.82rem; text-decoration:none; padding:5px 10px; border-radius:8px; border:1.5px solid #e5e7eb; transition:border-color .15s, color .15s;"
+               onmouseover="this.style.borderColor='#1A6B3C'; this.style.color='#1A6B3C';"
+               onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='#374151';">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                </svg>
+                {{ app()->getLocale() === 'ar' ? 'EN' : 'عربي' }}
+            </a>
+            <a href="{{ route('login') }}" style="background:#1A6B3C; color:#fff; padding:7px 18px; border-radius:8px; font-weight:700; font-size:0.9rem; text-decoration:none; line-height:1; display:inline-block;">تسجيل الدخول</a>
+        </div>
+    </div>
+</nav>
 
 {{-- ══════════════════════════════════════════
      3. HERO SECTION  (#f3f4f6, 534px)
@@ -311,35 +283,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
             {{-- Text (right side in RTL) --}}
             <div class="hero-text">
-                <div>
-                    <span class="section-badge">منصة الإرشاد الأكاديمي</span>
-                </div>
+                <span class="section-badge">منصة الإرشاد الأكاديمي</span>
                 <h1 style="font-size: clamp(5rem, 10vw, 8.5rem); font-weight: 900; line-height: 1;
                             color: #1A6B3C; letter-spacing: .02em; margin: 0;">
                     كَـنَـف
                 </h1>
-                <p style="font-size: 1.2rem; color: #4b5563; line-height: 1.9; margin: 0; max-width: 500px;">
+                <p style="font-size: 1.1rem; color: #4b5563; line-height: 1.85; margin: 0; max-width: 480px;">
                     منصة ذكية لمتابعة الأداء الأكاديمي وتقديم الدعم المبكر،
                     تربط الطالب بمساره المهني المناسب من خلال إرشاد أكاديمي احترافي.
                 </p>
-                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+
+                {{-- Buttons --}}
+                <div style="display:flex; gap:12px; flex-wrap:wrap;">
                     <a href="{{ route('login') }}"
                        style="display:inline-flex; align-items:center; gap:10px;
-                              background:#1A6B3C; color:#fff; font-weight:700; font-size:1.05rem;
-                              padding:14px 36px; border-radius:12px; text-decoration:none;
-                              transition: background .2s, transform .2s; box-shadow: 0 4px 20px rgba(26,107,60,.3);"
+                              background:#1A6B3C; color:#fff; font-weight:700; font-size:1rem;
+                              padding:13px 32px; border-radius:12px; text-decoration:none;
+                              transition:background .2s, transform .2s; box-shadow:0 4px 20px rgba(26,107,60,.3);"
                        onmouseover="this.style.background='#155e34'; this.style.transform='translateY(-2px)'"
                        onmouseout="this.style.background='#1A6B3C'; this.style.transform='translateY(0)'">
                         ابدأ الآن
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                         </svg>
                     </a>
                     <a href="#about"
                        style="display:inline-flex; align-items:center; gap:8px;
-                              background:transparent; color:#1A6B3C; font-weight:700; font-size:1.05rem;
-                              padding:14px 28px; border-radius:12px; text-decoration:none;
-                              border:1.5px solid #1A6B3C; transition: background .2s;"
+                              background:transparent; color:#1A6B3C; font-weight:700; font-size:1rem;
+                              padding:13px 28px; border-radius:12px; text-decoration:none;
+                              border:1.5px solid #1A6B3C; transition:background .2s;"
                        onclick="event.preventDefault(); document.getElementById('about').scrollIntoView({behavior:'smooth'})"
                        onmouseover="this.style.background='#e6f4ec'"
                        onmouseout="this.style.background='transparent'">
@@ -347,21 +319,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     </a>
                 </div>
 
-                {{-- Stats row --}}
-                <div style="display:flex; gap:40px; padding-top:12px; flex-wrap:wrap;">
-                    <div>
-                        <div style="font-size:2rem; font-weight:900; color:#1A6B3C; line-height:1.1;">+500</div>
-                        <div style="font-size:.9rem; color:#9ca3af; font-weight:600; margin-top:2px;">طالب مسجّل</div>
+                {{-- Stats --}}
+                <div style="display:flex; gap:32px; padding-top:8px; flex-wrap:wrap; align-items:center;">
+                    <div style="text-align:end;">
+                        <div style="font-size:1.9rem; font-weight:900; color:#1A6B3C; line-height:1.1;">95%</div>
+                        <div style="font-size:.82rem; color:#9ca3af; font-weight:600; margin-top:2px;">رضا المستخدمين</div>
                     </div>
-                    <div style="width:1px; background:#e5e7eb;"></div>
-                    <div>
-                        <div style="font-size:2rem; font-weight:900; color:#1A6B3C; line-height:1.1;">30+</div>
-                        <div style="font-size:.9rem; color:#9ca3af; font-weight:600; margin-top:2px;">مرشد أكاديمي</div>
+                    <div style="width:1px; height:40px; background:#e5e7eb; flex-shrink:0;"></div>
+                    <div style="text-align:end;">
+                        <div style="font-size:1.9rem; font-weight:900; color:#1A6B3C; line-height:1.1;">+30</div>
+                        <div style="font-size:.82rem; color:#9ca3af; font-weight:600; margin-top:2px;">مرشد أكاديمي</div>
                     </div>
-                    <div style="width:1px; background:#e5e7eb;"></div>
-                    <div>
-                        <div style="font-size:2rem; font-weight:900; color:#1A6B3C; line-height:1.1;">95%</div>
-                        <div style="font-size:.9rem; color:#9ca3af; font-weight:600; margin-top:2px;">رضا المستخدمين</div>
+                    <div style="width:1px; height:40px; background:#e5e7eb; flex-shrink:0;"></div>
+                    <div style="text-align:end;">
+                        <div style="font-size:1.9rem; font-weight:900; color:#1A6B3C; line-height:1.1;">+500</div>
+                        <div style="font-size:.82rem; color:#9ca3af; font-weight:600; margin-top:2px;">طالب مسجّل</div>
                     </div>
                 </div>
             </div>
@@ -370,16 +342,16 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="hero-image-wrap">
                 <img src="{{ asset('images/kanaf2.png') }}"
                      alt="كَنَف"
-                     style="max-height: 426px; max-width: 100%; object-fit: contain; drop-shadow: 0 20px 60px rgba(0,0,0,.12);"
+                     style="max-height:440px; max-width:100%; object-fit:contain;"
                      onerror="this.parentElement.style.display='none'">
             </div>
         </div>
 
         {{-- Carousel dots --}}
-        <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:32px;">
+        <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:28px;">
+            <div class="dot"></div>
+            <div class="dot"></div>
             <div class="dot active"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
         </div>
     </div>
 </section>
@@ -391,19 +363,11 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="section-content" style="padding-block:40px;">
         <div class="about-grid">
 
-            {{-- Image (right side in RTL) --}}
-            <div class="about-image">
-                <img src="{{ asset('images/kanaf-logo.png') }}"
-                     alt="كَنَف"
-                     style="width:220px; height:220px; object-fit:contain; opacity:.85;"
-                     onerror="this.style.display='none'">
-            </div>
-
-            {{-- Text --}}
+            {{-- Text (right side in RTL — first in HTML) --}}
             <div class="about-text">
                 <div>
                     <span class="section-badge">عن المنصة</span>
-                    <h2 class="section-title" style="margin-top:8px;">لماذا كَـنَـف؟</h2>
+                    <h2 class="section-title" style="margin-top:6px;">لماذا كَـنَـف؟</h2>
                 </div>
                 <p class="section-desc">
                     كَنَف منصة ذكية متكاملة تُرافق الطالب خلال رحلته الجامعية عبر دعم أكاديمي استباقي.
@@ -416,11 +380,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 </p>
 
                 {{-- Feature chips --}}
-                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;">
+                <div style="display:flex; flex-wrap:wrap; gap:10px;">
                     @foreach(['تحليل الأداء الأكاديمي', 'الإرشاد الأكاديمي', 'الاستشارات المهنية', 'الذكاء الاصطناعي'] as $feat)
                     <span style="display:inline-flex; align-items:center; gap:6px;
-                                 background:#e6f4ec; color:#1A6B3C; font-size:.8rem; font-weight:700;
-                                 padding:6px 14px; border-radius:100px;">
+                                 background:#e6f4ec; color:#1A6B3C; font-size:.82rem; font-weight:700;
+                                 padding:6px 14px; border-radius:100px; border:1px solid #c6e8d3;">
                         <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                         </svg>
@@ -429,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     @endforeach
                 </div>
 
-                <div style="margin-top:8px;">
+                <div>
                     <a href="{{ route('login') }}"
                        style="display:inline-flex; align-items:center; gap:8px;
                               color:#1A6B3C; font-weight:700; font-size:.9rem; text-decoration:none;
@@ -443,6 +407,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     </a>
                 </div>
             </div>
+
+            {{-- Image (left side in RTL — second in HTML) --}}
+            <div class="about-image" style="background:#f0faf4;">
+                <img src="{{ asset('images/kanaf-logo.png') }}"
+                     alt="كَنَف"
+                     style="width:240px; height:240px; object-fit:contain;"
+                     onerror="this.style.display='none'">
+            </div>
         </div>
     </div>
 </section>
@@ -454,30 +426,32 @@ document.addEventListener('DOMContentLoaded', function () {
     <div class="section-content" style="padding-block:40px;">
 
         {{-- Section header --}}
-        <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:32px;">
-            <div style="text-align:right;">
-                <span class="section-badge">خدماتنا</span>
-                <h2 class="section-title" style="margin-top:8px;">كيف تساعدك منصة كَـنَـف؟</h2>
-                <p class="section-desc" style="margin-top:8px; max-width:560px;">
-                    مجموعة متكاملة من الخدمات الأكاديمية الذكية المصممة لمساعدة الطالب على النجاح.
-                </p>
+        <div style="margin-bottom:40px;">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+                <a href="{{ route('login') }}"
+                   style="flex-shrink:0; margin-top:8px; display:inline-flex; align-items:center; gap:6px;
+                          color:#1A6B3C; font-weight:700; font-size:.85rem; text-decoration:none;
+                          border:1.5px solid #1A6B3C; padding:8px 18px; border-radius:8px;
+                          transition:background .2s;"
+                   onmouseover="this.style.background='#e6f4ec'"
+                   onmouseout="this.style.background='transparent'">
+                    عرض الكل
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </a>
+                <div style="text-align:end;">
+                    <span class="section-badge">خدماتنا</span>
+                    <h2 class="section-title" style="margin-top:6px;">كيف تساعدك منصة كَـنَـف؟</h2>
+                    <p class="section-desc" style="margin-top:8px; max-width:500px;">
+                        مجموعة متكاملة من الخدمات الأكاديمية الذكية المصممة لمساعدة الطالب على النجاح.
+                    </p>
+                </div>
             </div>
-            <a href="{{ route('login') }}"
-               style="flex-shrink:0; display:inline-flex; align-items:center; gap:6px;
-                      color:#1A6B3C; font-weight:700; font-size:.85rem; text-decoration:none;
-                      border:1.5px solid #1A6B3C; padding:8px 18px; border-radius:8px;
-                      transition:background .2s;"
-               onmouseover="this.style.background='#e6f4ec'"
-               onmouseout="this.style.background='transparent'">
-                عرض الكل
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                </svg>
-            </a>
         </div>
 
         {{-- Service cards scroll --}}
-        <div class="overflow-x-auto scroll-hide" id="services-scroll">
+        <div class="overflow-x-auto scroll-hide" id="services-scroll" style="padding-inline:16px; scroll-padding-inline-start:16px;">
             <div style="display:flex; gap:20px; width:max-content; padding-bottom:4px;">
 
                 @php
@@ -535,17 +509,13 @@ document.addEventListener('DOMContentLoaded', function () {
 </section>
 
 {{-- ══════════════════════════════════════════
-     6. ARTICLES AND NEWS SECTION  (#fff, 812px)
+     6. ARTICLES AND NEWS SECTION
 ══════════════════════════════════════════ --}}
 <section id="articles" class="section-inner" style="background:#ffffff;">
-    <div class="section-content" style="padding-top:40px; padding-bottom:80px;">
+    <div class="section-content" style="padding-top:60px; padding-bottom:80px;">
 
         {{-- Section header --}}
-        <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:32px;">
-            <div style="text-align:right;">
-                <span class="section-badge">المقالات والأخبار</span>
-                <h2 class="section-title" style="margin-top:8px;">آخر المقالات والأخبار</h2>
-            </div>
+        <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
             <a href="{{ route('login') }}"
                style="flex-shrink:0; display:inline-flex; align-items:center; gap:6px;
                       color:#1A6B3C; font-weight:700; font-size:.85rem; text-decoration:none;
@@ -558,31 +528,33 @@ document.addEventListener('DOMContentLoaded', function () {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                 </svg>
             </a>
+            <div style="text-align:end;">
+                <span class="section-badge">المقالات والأخبار</span>
+                <h2 class="section-title" style="margin-top:6px;">آخر المقالات والأخبار</h2>
+            </div>
         </div>
 
-        {{-- Article cards --}}
-        <div style="display:flex; gap:24px; flex-wrap:wrap;">
+        {{-- Article cards grid --}}
+        @php
+        $articles = [
+            ['tag'=>'إرشاد أكاديمي', 'title'=>'كيف يساعدك المرشد الأكاديمي على تجاوز تحديات الفصل الدراسي؟',        'date'=>'١٢ مايو ٢٠٢٦',   'read'=>'٥ دقائق'],
+            ['tag'=>'ذكاء اصطناعي',  'title'=>'الذكاء الاصطناعي في التعليم: كيف تكشف كَنَف التعثر الأكاديمي مبكراً', 'date'=>'٨ مايو ٢٠٢٦',    'read'=>'٧ دقائق'],
+            ['tag'=>'مستقبل مهني',   'title'=>'دليلك لاختيار المسار المهني المناسب بعد التخرج',                      'date'=>'٣ مايو ٢٠٢٦',    'read'=>'٦ دقائق'],
+            ['tag'=>'نصائح',         'title'=>'١٠ عادات أكاديمية تساعدك على تحسين معدلك التراكمي',                    'date'=>'٢٨ أبريل ٢٠٢٦', 'read'=>'٤ دقائق'],
+        ];
+        $tagColors = [
+            'إرشاد أكاديمي' => ['bg'=>'#e6f4ec', 'color'=>'#1A6B3C'],
+            'ذكاء اصطناعي'  => ['bg'=>'#eff6ff', 'color'=>'#1d4ed8'],
+            'مستقبل مهني'   => ['bg'=>'#fffbeb', 'color'=>'#92400e'],
+            'نصائح'         => ['bg'=>'#fdf4ff', 'color'=>'#7e22ce'],
+        ];
+        @endphp
 
-            @php
-            $articles = [
-                ['tag'=>'إرشاد أكاديمي', 'title'=>'كيف يساعدك المرشد الأكاديمي على تجاوز تحديات الفصل الدراسي؟', 'date'=>'١٢ مايو ٢٠٢٦', 'read'=>'٥ دقائق'],
-                ['tag'=>'ذكاء اصطناعي',  'title'=>'الذكاء الاصطناعي في التعليم: كيف تكشف كَنَف التعثر الأكاديمي مبكراً', 'date'=>'٨ مايو ٢٠٢٦',  'read'=>'٧ دقائق'],
-                ['tag'=>'مستقبل مهني',   'title'=>'دليلك لاختيار المسار المهني المناسب بعد التخرج', 'date'=>'٣ مايو ٢٠٢٦',  'read'=>'٦ دقائق'],
-                ['tag'=>'نصائح',         'title'=>'١٠ عادات أكاديمية تساعدك على تحسين معدلك التراكمي', 'date'=>'٢٨ أبريل ٢٠٢٦', 'read'=>'٤ دقائق'],
-            ];
-            $tagColors = [
-                'إرشاد أكاديمي' => ['bg'=>'#e6f4ec', 'color'=>'#1A6B3C'],
-                'ذكاء اصطناعي'  => ['bg'=>'#eff6ff', 'color'=>'#1d4ed8'],
-                'مستقبل مهني'   => ['bg'=>'#fffbeb', 'color'=>'#92400e'],
-                'نصائح'         => ['bg'=>'#fdf4ff', 'color'=>'#7e22ce'],
-            ];
-            @endphp
-
-            @foreach($articles as $article)
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+            @foreach($articles as $i => $article)
             @php $tc = $tagColors[$article['tag']] ?? ['bg'=>'#f3f4f6','color'=>'#374151']; @endphp
-            <div class="article-card">
+            <div class="article-card" style="{{ $i === 3 ? 'grid-column: 3 / 4;' : '' }}">
                 <div class="article-img">
-                    {{-- Decorative placeholder --}}
                     <svg width="48" height="48" fill="none" stroke="#d1d5db" stroke-width="1" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                     </svg>
@@ -600,51 +572,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             </div>
             @endforeach
-
         </div>
+
     </div>
 </section>
 
 {{-- ══════════════════════════════════════════
-     7. FOOTER  (DGA Design System)
+     7. FOOTER
 ══════════════════════════════════════════ --}}
-<dga-footer id="landing-footer"></dga-footer>
-<script>
-customElements.whenDefined('dga-footer').then(function () {
-    var f = document.getElementById('landing-footer');
-    if (!f) return;
-    f.background       = 'Light';
-    f.NavLinks         = true;
-    f.socialMediaTitle = 'وسائل التواصل الاجتماعي';
-    f.copyright        = 'جميع الحقوق محفوظة لهيئة الحكومة الرقمية © 2026';
-    f.groupLinks = [
-        { title: 'المنصة', links: [
-            { name: 'عن المنصة',        target: '#about' },
-            { name: 'خدماتنا',          target: '#services' },
-            { name: 'المقالات والأخبار', target: '#articles' },
-        ]},
-        { title: 'الدعم', links: [
-            { name: 'خريطة الموقع', target: '#' },
-            { name: 'RSS',           target: '#' },
-            { name: 'تطبيق الجوال', target: '#' },
-        ]},
-    ];
-    f.socialMediaLinks = [
-        { title: 'تويتر',    target: '#', icon: { name: 'TwitterIcon',   variant: 'stroke' } },
-        { title: 'يوتيوب',   target: '#', icon: { name: 'YoutubeIcon',   variant: 'stroke' } },
-        { title: 'إنستغرام', target: '#', icon: { name: 'InstagramIcon', variant: 'stroke' } },
-    ];
-    f.basicLinks = [
-        { name: 'الرئيسية',      target: '{{ route("landing") }}' },
-        { name: 'تسجيل الدخول', target: '{{ route("login") }}' },
-    ];
-    f.extraLinks = [
-        { name: 'سياسة الخصوصية',  target: '#' },
-        { name: 'الشروط والأحكام', target: '#' },
-    ];
-    f.bottomImages = ['{{ asset("images/kanaf-logo.png") }}'];
-});
-</script>
+<footer style="background:#1A6B3C; color:#fff; padding:36px 0;">
+    <div style="max-width:1440px; width:100%; margin:0 auto; padding:0 80px;" dir="rtl">
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+            <a href="{{ route('landing') }}" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0;">
+                <img src="{{ asset('images/kanaf-logo.png') }}" alt="كَنَف" style="height:28px; width:auto; filter:brightness(0) invert(1);">
+                <span style="font-size:1.1rem; font-weight:900;">كَـنَـف</span>
+            </a>
+            <div style="display:flex; gap:24px; flex-wrap:wrap;">
+                <a href="#about"               class="kanaf-footer-link" style="color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color .15s;">عن المنصة</a>
+                <a href="#services"            class="kanaf-footer-link" style="color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color .15s;">خدماتنا</a>
+                <a href="#articles"            class="kanaf-footer-link" style="color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color .15s;">المقالات والأخبار</a>
+                <a href="{{ route('login') }}" class="kanaf-footer-link" style="color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color .15s;">تسجيل الدخول</a>
+            </div>
+            <p style="color:rgba(255,255,255,0.65); font-size:0.82rem; margin:0; flex-shrink:0;">جميع الحقوق محفوظة © 2026 كَـنَـف</p>
+        </div>
+    </div>
+</footer>
 
 </div>{{-- /page-root --}}
 </body>

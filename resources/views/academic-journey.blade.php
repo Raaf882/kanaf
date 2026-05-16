@@ -10,8 +10,8 @@
 @endphp
 
 {{-- ══ HERO HEADER ══ --}}
-<div style="background:#f3f4f6; padding:40px 0 32px;">
-    <div style="max-width:1440px; width:100%; margin:0 auto; padding:0 80px;">
+<div class="page-hero-strip">
+    <div class="page-hero-inner">
 
         {{-- Breadcrumb --}}
         <nav class="flex items-center gap-2 text-sm text-gray-500 mb-5" dir="rtl">
@@ -41,7 +41,7 @@
 </div>
 
 {{-- ══ MAIN CONTENT ══ --}}
-<div style="max-width:1440px; width:100%; margin:0 auto; padding:40px 80px 60px;" dir="rtl">
+<div class="page-body" dir="rtl">
 
     {{-- Stats Row --}}
     @if($totalCourses > 0)

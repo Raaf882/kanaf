@@ -1,4 +1,4 @@
-<div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" dir="rtl">
+<div class="page-body" dir="rtl">
 
     {{-- ══ TOAST ══ --}}
     @if($showToast)

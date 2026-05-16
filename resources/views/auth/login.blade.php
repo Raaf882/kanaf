@@ -18,6 +18,14 @@
         body { font-family: 'Cairo', sans-serif; }
         input[type="password"]::-ms-reveal { display: none; }
 
+        /* ── Nav / Footer hover ── */
+        .kanaf-nav-link:hover    { color: #1A6B3C !important; }
+        .kanaf-footer-link:hover { color: #ffffff !important; }
+        @media (max-width: 768px) {
+            .kanaf-nav-links { display: none !important; }
+            .kanaf-nav-inner { padding: 0 20px !important; }
+        }
+
         @media (min-width: 1280px) { html { font-size: 17px; } }
         @media (min-width: 1536px) { html { font-size: 18px; } }
 
@@ -68,7 +76,7 @@
             font-size: 1rem;
             font-family: 'Cairo', sans-serif;
             transition: border-color .2s, box-shadow .2s;
-            text-align: right;
+            text-align: end;
             color: #111827;
         }
         .form-input:focus {
@@ -99,66 +107,33 @@
 <body>
 <div class="login-page">
 
-    {{-- Government Banner --}}
-    <dga-second-nav-header>
-        <dga-second-nav-header-content>
-            <dga-second-nav-header-item label="{{ __('موقع حكومي رسمي مسجل لدى هيئة الحكومة الرقمية') }}">
-            </dga-second-nav-header-item>
-        </dga-second-nav-header-content>
-    </dga-second-nav-header>
-
-    {{-- Nav Header --}}
-    <dga-nav-header sticky="true" divider="true" full-width="true">
-        <dga-nav-header-main collapsed="true">
-            <dga-nav-header-logos
-                logo-src="{{ asset('images/kanaf-logo.png') }}"
-                logo-alt="{{ __('كَـنَـف') }}"
-                logo-link="{{ route('landing') }}"
-                gov-src="https://dga-nds-fbhtx.ondigitalocean.app/mobile-logo.svg"
-                gov-link="#">
-            </dga-nav-header-logos>
-            <dga-nav-header-menu>
-                <dga-nav-header-link label="{{ __('الرئيسية') }}"          id="lnl-home"></dga-nav-header-link>
-                <dga-nav-header-link label="{{ __('رحلتك الأكاديمية') }}"  id="lnl-journey"></dga-nav-header-link>
-                <dga-nav-header-link label="{{ __('مستقبلك المهني') }}"    id="lnl-career"></dga-nav-header-link>
-            </dga-nav-header-menu>
-        </dga-nav-header-main>
-        <dga-nav-header-actions>
-            <dga-header-action-btn id="lnl-lang"  label="{{ app()->getLocale() === 'ar' ? 'English' : 'عربي' }}" icon="translation"></dga-header-action-btn>
-            <dga-header-action-btn id="lnl-login" label="{{ __('تسجيل الدخول') }}" icon="user"></dga-header-action-btn>
-        </dga-nav-header-actions>
-    </dga-nav-header>
-
-    <script>
-    customElements.whenDefined('dga-nav-header-logos').then(function () {
-        function shrinkLogo() {
-            document.querySelectorAll('dga-nav-header-logos').forEach(function (el) {
-                if (el.shadowRoot && !el.shadowRoot.querySelector('style[data-kanaf-logo]')) {
-                    var s = document.createElement('style');
-                    s.setAttribute('data-kanaf-logo', '1');
-                    s.textContent = '.header__logo img { height: 32px !important; width: auto !important; }';
-                    el.shadowRoot.appendChild(s);
-                }
-            });
-        }
-        requestAnimationFrame(shrinkLogo);
-        setTimeout(shrinkLogo, 400);
-    });
-    document.addEventListener('DOMContentLoaded', function () {
-        function goTo(id, url) {
-            var el = document.getElementById(id);
-            if (el) el.addEventListener('click', function () { window.location.href = url; });
-        }
-        goTo('lnl-home',    '{{ route('landing') }}');
-        goTo('lnl-journey', '{{ route('login') }}');
-        goTo('lnl-career',  '{{ route('login') }}');
-        goTo('lnl-login',   '{{ route('login') }}');
-        var langBtn = document.getElementById('lnl-lang');
-        if (langBtn) langBtn.addEventListener('click', function () {
-            window.location.href = '{{ route('locale', app()->getLocale() === 'ar' ? 'en' : 'ar') }}';
-        });
-    });
-    </script>
+    {{-- Navbar --}}
+    <nav style="background:#ffffff; border-bottom:1.5px solid #e5e7eb; position:sticky; top:0; z-index:50; box-shadow:0 1px 6px rgba(0,0,0,0.04);">
+        <div class="kanaf-nav-inner" style="max-width:1440px; width:100%; margin:0 auto; padding:0 80px; height:64px; display:flex; align-items:center; justify-content:space-between;" dir="rtl">
+            <a href="{{ route('landing') }}" style="display:flex; align-items:center; gap:10px; text-decoration:none; flex-shrink:0;">
+                <img src="{{ asset('images/kanaf-logo.png') }}" alt="{{ __('كَنَف') }}" style="height:34px; width:auto;">
+                <span style="font-size:1.2rem; font-weight:900; color:#1A6B3C;">كَـنَـف</span>
+            </a>
+            <div class="kanaf-nav-links" style="display:flex; align-items:center; gap:28px;">
+                <a href="{{ route('landing') }}"          class="kanaf-nav-link" style="color:#374151; font-weight:600; text-decoration:none; font-size:0.92rem; transition:color .15s;">الرئيسية</a>
+                <a href="{{ route('landing') }}#about"    class="kanaf-nav-link" style="color:#374151; font-weight:600; text-decoration:none; font-size:0.92rem; transition:color .15s;">عن المنصة</a>
+                <a href="{{ route('landing') }}#services" class="kanaf-nav-link" style="color:#374151; font-weight:600; text-decoration:none; font-size:0.92rem; transition:color .15s;">خدماتنا</a>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; flex-shrink:0;">
+                <a href="{{ route('locale', app()->getLocale() === 'ar' ? 'en' : 'ar') }}"
+                   title="{{ app()->getLocale() === 'ar' ? 'Switch to English' : 'التبديل للعربية' }}"
+                   style="display:flex; align-items:center; gap:5px; color:#374151; font-weight:700; font-size:0.82rem; text-decoration:none; padding:5px 10px; border-radius:8px; border:1.5px solid #e5e7eb; transition:border-color .15s, color .15s;"
+                   onmouseover="this.style.borderColor='#1A6B3C'; this.style.color='#1A6B3C';"
+                   onmouseout="this.style.borderColor='#e5e7eb'; this.style.color='#374151';">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="flex-shrink:0;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
+                    </svg>
+                    {{ app()->getLocale() === 'ar' ? 'EN' : 'عربي' }}
+                </a>
+                <a href="{{ route('login') }}" style="background:#1A6B3C; color:#fff; padding:7px 18px; border-radius:8px; font-weight:700; font-size:0.9rem; text-decoration:none; line-height:1; display:inline-block;">تسجيل الدخول</a>
+            </div>
+        </div>
+    </nav>
 
     {{-- Main content --}}
     <div class="login-hero">
@@ -168,7 +143,7 @@
             <div class="login-card">
 
                 {{-- Header --}}
-                <div style="text-align:right; margin-bottom:32px;">
+                <div style="text-align:end; margin-bottom:32px;">
                     <div style="display:flex; align-items:center; gap:12px; justify-content:flex-end; margin-bottom:16px;">
                         <div>
                             <h1 style="font-size:1.75rem; font-weight:900; color:#111827; margin:0; line-height:1.2;">
@@ -202,7 +177,7 @@
 
                     {{-- Email --}}
                     <div style="display:flex; flex-direction:column; gap:6px;">
-                        <label style="font-size:.875rem; font-weight:700; color:#374151; text-align:right;">
+                        <label style="font-size:.875rem; font-weight:700; color:#374151; text-align:end;">
                             {{ __('اسم المستخدم أو البريد الإلكتروني') }}
                         </label>
                         <input type="email"
@@ -212,12 +187,12 @@
                                placeholder="{{ __('ادخل بريدك الإلكتروني الجامعي') }}"
                                class="form-input {{ $errors->any() ? 'error' : '' }}"
                                dir="ltr"
-                               style="text-align:right; direction:rtl;">
+                               style="text-align:end; direction:rtl;">
                     </div>
 
                     {{-- Password --}}
                     <div style="display:flex; flex-direction:column; gap:6px;">
-                        <label style="font-size:.875rem; font-weight:700; color:#374151; text-align:right;">
+                        <label style="font-size:.875rem; font-weight:700; color:#374151; text-align:end;">
                             {{ __('كلمة المرور') }}
                         </label>
                         <div style="position:relative;">
@@ -228,10 +203,10 @@
                                    placeholder="••••••••"
                                    class="form-input {{ $errors->any() ? 'error' : '' }}"
                                    dir="ltr"
-                                   style="padding-left:48px;">
+                                   style="padding-inline-start:48px;">
                             <button type="button"
                                     onclick="togglePassword()"
-                                    style="position:absolute; left:14px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#9ca3af; padding:2px;">
+                                    style="position:absolute; inset-inline-start:14px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#9ca3af; padding:2px;">
                                 <svg id="eye-on"  width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -307,43 +282,23 @@
     </div>
 
     {{-- Footer --}}
-    <dga-footer id="login-footer"></dga-footer>
-    <script>
-    customElements.whenDefined('dga-footer').then(function () {
-        var f = document.getElementById('login-footer');
-        if (!f) return;
-        f.background       = 'Light';
-        f.NavLinks         = true;
-        f.socialMediaTitle = 'وسائل التواصل الاجتماعي';
-        f.copyright        = 'جميع الحقوق محفوظة لهيئة الحكومة الرقمية © 2026';
-        f.groupLinks = [
-            { title: 'المنصة', links: [
-                { name: 'عن المنصة',         target: '{{ route("landing") }}#about' },
-                { name: 'خدماتنا',           target: '{{ route("landing") }}#services' },
-                { name: 'المقالات والأخبار', target: '{{ route("landing") }}#articles' },
-            ]},
-            { title: 'الدعم', links: [
-                { name: 'خريطة الموقع', target: '#' },
-                { name: 'RSS',           target: '#' },
-                { name: 'تطبيق الجوال', target: '#' },
-            ]},
-        ];
-        f.socialMediaLinks = [
-            { title: 'تويتر',    target: '#', icon: { name: 'TwitterIcon',   variant: 'stroke' } },
-            { title: 'يوتيوب',   target: '#', icon: { name: 'YoutubeIcon',   variant: 'stroke' } },
-            { title: 'إنستغرام', target: '#', icon: { name: 'InstagramIcon', variant: 'stroke' } },
-        ];
-        f.basicLinks = [
-            { name: 'الرئيسية',      target: '{{ route("landing") }}' },
-            { name: 'تسجيل الدخول', target: '{{ route("login") }}' },
-        ];
-        f.extraLinks = [
-            { name: 'سياسة الخصوصية',   target: '#' },
-            { name: 'الشروط والأحكام', target: '#' },
-        ];
-        f.bottomImages = ['{{ asset("images/kanaf-logo.png") }}'];
-    });
-    </script>
+    <footer style="background:#1A6B3C; color:#fff; padding:36px 0; margin-top:auto;">
+        <div style="max-width:1440px; width:100%; margin:0 auto; padding:0 80px;" dir="rtl">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;">
+                <a href="{{ route('landing') }}" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; flex-shrink:0;">
+                    <img src="{{ asset('images/kanaf-logo.png') }}" alt="{{ __('كَنَف') }}" style="height:28px; width:auto; filter:brightness(0) invert(1);">
+                    <span style="font-size:1.1rem; font-weight:900;">كَـنَـف</span>
+                </a>
+                <div style="display:flex; gap:24px; flex-wrap:wrap;">
+                    <a href="{{ route('landing') }}#about"    class="kanaf-footer-link" style="color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color .15s;">عن المنصة</a>
+                    <a href="{{ route('landing') }}#services" class="kanaf-footer-link" style="color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color .15s;">خدماتنا</a>
+                    <a href="{{ route('landing') }}#articles" class="kanaf-footer-link" style="color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color .15s;">المقالات</a>
+                    <a href="{{ route('login') }}"            class="kanaf-footer-link" style="color:rgba(255,255,255,0.8); text-decoration:none; font-size:0.88rem; font-weight:600; transition:color .15s;">تسجيل الدخول</a>
+                </div>
+                <p style="color:rgba(255,255,255,0.65); font-size:0.82rem; margin:0; flex-shrink:0;">جميع الحقوق محفوظة © 2026 كَـنَـف</p>
+            </div>
+        </div>
+    </footer>
 
 </div>{{-- /login-page --}}
 

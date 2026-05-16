@@ -1,4 +1,4 @@
-<div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" dir="rtl" x-data>
+<div class="page-body" dir="rtl" x-data>
 
     {{-- ══════════════ TOAST ══════════════ --}}
     @if($showToast)
@@ -207,7 +207,7 @@
             </div>
 
             {{-- Stats: 3 cards --}}
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {{-- Tests completed --}}
                 <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
                     <div class="w-10 h-10 bg-[#F0FAF4] rounded-xl flex items-center justify-center mx-auto mb-3">
