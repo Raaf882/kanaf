@@ -87,3 +87,5 @@ Start the Laravel development server:
 Finally: Run the project in the browser
 ####
 
+# AI model API
+https://github.com/SalwaAlatifi/sap-model-api.git
