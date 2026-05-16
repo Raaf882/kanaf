@@ -1,4 +1,1 @@
-import { defineCustomElements } from '@platformscode/core/loader';
-import 'platformscode-new-react/dist/style.css';
-
-defineCustomElements();
+// Alpine.js is loaded via CDN or Livewire — no extra imports needed.

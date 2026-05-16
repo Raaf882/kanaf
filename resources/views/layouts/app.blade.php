@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
+    {{-- ── FOUC guard: hide page until all head CSS is parsed ── --}}
+    <style>html:not(.ready){visibility:hidden}</style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? __('كَـنَـف') }} — {{ __('كَـنَـف') }}</title>
@@ -11,7 +14,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=optional" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     <style>
@@ -73,6 +76,8 @@
             .kanaf-nav-username { display: none; }
         }
     </style>
+    {{-- ── Reveal page once all preceding CSS is parsed (parser-blocking) ── --}}
+    <script>document.documentElement.classList.add('ready')</script>
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
 

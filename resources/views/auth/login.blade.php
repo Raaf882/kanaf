@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
+    {{-- ── FOUC guard: hide page until all head CSS is parsed ── --}}
+    <style>html:not(.ready){visibility:hidden}</style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ __('تسجيل الدخول') }} — {{ __('كَـنَـف') }}</title>
@@ -11,7 +14,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=optional" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -103,6 +106,8 @@
         .btn-primary:hover { background: #155e34; transform: translateY(-1px); }
         .btn-primary:active { transform: translateY(0); }
     </style>
+    {{-- ── Reveal page once all preceding CSS is parsed (parser-blocking) ── --}}
+    <script>document.documentElement.classList.add('ready')</script>
 </head>
 <body>
 <div class="login-page">

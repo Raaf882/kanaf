@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+    {{-- ── FOUC guard: hide page until all head CSS is parsed ── --}}
+    <style>html:not(.ready){visibility:hidden}</style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كَـنَـف — منصة الإرشاد الأكاديمي</title>
     <link rel="icon" href="{{ asset('images/kanaf-logo.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=optional" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -233,6 +236,8 @@
             html { font-size: 18px; }
         }
     </style>
+    {{-- ── Reveal page once all preceding CSS is parsed (parser-blocking) ── --}}
+    <script>document.documentElement.classList.add('ready')</script>
 </head>
 <body class="bg-white text-gray-900 overflow-x-hidden">
 <div id="page-root">
