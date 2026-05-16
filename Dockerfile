@@ -1,48 +1,52 @@
 FROM php:8.3-cli
 
-# Install system dependencies
+# System packages
 RUN apt-get update && apt-get install -y \
     git \
-    unzip \
     curl \
-    libzip-dev \
+    unzip \
     zip \
-    nodejs \
-    npm \
     sqlite3 \
     libsqlite3-dev \
-    && docker-php-ext-install pdo pdo_sqlite zip
+    libzip-dev \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    nodejs \
+    npm
 
-# Install Composer
+# PHP extensions
+RUN docker-php-ext-install \
+    pdo \
+    pdo_sqlite \
+    mbstring \
+    zip \
+    exif \
+    pcntl
+
+# Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
+# App directory
 WORKDIR /app
 
-# Copy project files
+# Copy files
 COPY . .
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+# Install Composer dependencies
+RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
 
-# Install Node dependencies
+# Install frontend dependencies
 RUN npm install
 
-# Build frontend assets
+# Build assets
 RUN npm run build
 
-# Laravel permissions
-RUN mkdir -p storage/framework/sessions \
-    storage/framework/views \
-    storage/framework/cache \
-    storage/logs \
-    bootstrap/cache && \
-    chmod -R 775 storage bootstrap/cache database
+# Permissions
+RUN chmod -R 775 storage bootstrap/cache database
 
-# Expose Render port
 EXPOSE 10000
 
-# Start Laravel
 CMD php artisan key:generate --force && \
     php artisan migrate --force && \
     php artisan db:seed --force && \
