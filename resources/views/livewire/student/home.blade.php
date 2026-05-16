@@ -63,7 +63,7 @@
     {{-- ── Page Content ── --}}
     <div style="max-width:1440px; width:100%; margin:0 auto; padding:32px 80px 60px;" class="space-y-8" dir="rtl">
 
-        {{-- Hero greeting --}}
+        {{-- ══ 1. Hero greeting ══ --}}
         <div style="background:linear-gradient(135deg,#1A6B3C 0%,#2d8a54 100%); border-radius:20px; padding:32px 36px; color:#fff; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
             <div>
                 @php
@@ -72,7 +72,7 @@
                 @endphp
                 <p style="font-size:.9rem; opacity:.8; margin:0 0 4px;">{{ $greeting }}</p>
                 <h1 style="font-size:2rem; font-weight:900; margin:0; line-height:1.2;">
-                    {{ auth()->user()->first_name }} 👋
+                    أهلاً {{ auth()->user()->first_name }} 👋
                 </h1>
                 <p style="font-size:.9rem; opacity:.75; margin:8px 0 0; max-width:480px; line-height:1.7;">
                     في لوحتك الأكاديمية ستجد ملخصاً واضحاً لوضعك الدراسي الحالي، مع توجيهات تساعدك على تحديد خطواتك التالية.
@@ -81,62 +81,17 @@
             <div style="opacity:.15;">
                 <svg width="80" height="80" fill="none" stroke="#fff" stroke-width="1" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
                 </svg>
             </div>
         </div>
 
-        {{-- Stats row --}}
-        @php $stats = $this->stats; @endphp
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
-                <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mx-auto mb-3">
-                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-                    </svg>
-                </div>
-                <p class="text-3xl font-black text-gray-900">{{ $stats['improvement'] }}%</p>
-                <p class="text-xs text-gray-400 mt-1 font-semibold">نسبة التحسن</p>
-            </div>
-
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
-                <div class="w-10 h-10 rounded-xl bg-[#F0FAF4] flex items-center justify-center mx-auto mb-3">
-                    <svg class="w-5 h-5 text-[#1A6B3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13"/>
-                    </svg>
-                </div>
-                <p class="text-3xl font-black text-gray-900">{{ $stats['courses'] }}</p>
-                <p class="text-xs text-gray-400 mt-1 font-semibold">المواد المجتازة</p>
-            </div>
-
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
-                <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center mx-auto mb-3">
-                    <svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                    </svg>
-                </div>
-                <p class="text-3xl font-black text-gray-900">{{ number_format($stats['gpa'], 1) }}</p>
-                <p class="text-xs text-gray-400 mt-1 font-semibold">المعدل التراكمي</p>
-            </div>
-
-            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
-                <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center mx-auto mb-3">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                    </svg>
-                </div>
-                <p class="text-sm font-black {{ $stats['status_color'] }} mt-2">{{ $stats['status'] }}</p>
-                <p class="text-xs text-gray-400 mt-1 font-semibold">الحالة الأكاديمية</p>
-            </div>
-        </div>
-
-        {{-- Two-col: Student info + Advisor contact --}}
+        {{-- ══ 2. Student info + Advisor ══ --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
             {{-- Student info --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                <h3 class="font-black text-gray-800 mb-4 pb-3 border-b border-gray-100 flex items-center gap-2 flex-row-reverse justify-end">
+                <h3 class="font-black text-gray-800 text-base mb-4 pb-3 border-b border-gray-100 flex items-center gap-2 flex-row-reverse justify-end">
                     <span>معلومات الطالب</span>
                     <div class="w-7 h-7 rounded-lg bg-[#F0FAF4] flex items-center justify-center">
                         <svg class="w-4 h-4 text-[#1A6B3C]" fill="currentColor" viewBox="0 0 20 20">
@@ -150,14 +105,14 @@
                 @endphp
                 <dl class="space-y-3 text-sm text-right">
                     @foreach([
-                        ['الاسم',          auth()->user()->name],
-                        ['الرقم الجامعي',  auth()->user()->student_id ?? '441'.str_pad(auth()->id(),7,'0',STR_PAD_LEFT)],
-                        ['التخصص',         auth()->user()->major ?? 'علوم حاسب'],
-                        ['المستوى الدراسي',$levels[$lvl] ?? $lvl],
+                        ['اسم الطالب',    auth()->user()->name],
+                        ['الرقم الجامعي', auth()->user()->student_id ?? '441'.str_pad(auth()->id(),7,'0',STR_PAD_LEFT)],
+                        ['التخصص',        auth()->user()->major ?? 'علوم حاسب'],
+                        ['المستوى',       $levels[$lvl] ?? $lvl],
                     ] as [$label, $value])
                     <div class="flex justify-between items-center py-2 border-b border-gray-50 last:border-0">
                         <span class="font-bold text-[#1A6B3C]">{{ $value }}</span>
-                        <span class="text-gray-400 text-xs">{{ $label }}</span>
+                        <span class="text-gray-500 text-xs font-semibold">{{ $label }}</span>
                     </div>
                     @endforeach
                 </dl>
@@ -165,7 +120,7 @@
 
             {{-- Advisor contact --}}
             <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-                <h3 class="font-black text-gray-800 mb-4 pb-3 border-b border-gray-100 flex items-center gap-2 flex-row-reverse justify-end">
+                <h3 class="font-black text-gray-800 text-base mb-4 pb-3 border-b border-gray-100 flex items-center gap-2 flex-row-reverse justify-end">
                     <span>تواصل مع المرشد</span>
                     <div class="w-7 h-7 rounded-lg bg-[#F0FAF4] flex items-center justify-center">
                         <svg class="w-4 h-4 text-[#1A6B3C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -206,16 +161,42 @@
             </div>
         </div>
 
-        {{-- SAP AI Prediction Card --}}
+        {{-- ══ 3. المستوى الدراسي (Stats) ══ --}}
+        @php $stats = $this->stats; @endphp
+        <div>
+            <h2 class="text-2xl font-black text-gray-900 text-right mb-5">المستوى الدراسي</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+                    <p class="text-3xl font-black text-gray-900">{{ $stats['improvement'] }}%</p>
+                    <p class="text-sm text-gray-400 mt-2 font-semibold">نسبة التحسن</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+                    <p class="text-3xl font-black text-gray-900">{{ $stats['courses'] }}</p>
+                    <p class="text-sm text-gray-400 mt-2 font-semibold">المواد المجتازة</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+                    <p class="text-3xl font-black text-gray-900">{{ number_format($stats['gpa'], 1) }}</p>
+                    <p class="text-sm text-gray-400 mt-2 font-semibold">المعدل التراكمي</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+                    <p class="text-xl font-black {{ $stats['status_color'] }} mt-2">{{ $stats['status'] }}</p>
+                    <p class="text-sm text-gray-400 mt-2 font-semibold">الحالة الأكاديمية</p>
+                </div>
+            </div>
+        </div>
+
+        {{-- SAP AI Prediction — only when data is available --}}
         @php $sap = $this->sapPrediction; @endphp
-        <div class="rounded-2xl border p-6 shadow-sm
-            {{ $sap['available']
-                ? ($sap['risk'] ? 'bg-red-50 border-red-200' : 'bg-[#F0FAF4] border-green-200')
-                : 'bg-white border-gray-100' }}">
+        @if($sap['available'])
+        <div class="rounded-2xl border p-6 shadow-sm {{ $sap['risk'] ? 'bg-red-50 border-red-200' : 'bg-[#F0FAF4] border-green-200' }}">
             <div class="flex items-start gap-4">
                 <div class="w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0
-                    {{ $sap['available'] ? ($sap['risk'] ? 'bg-red-100' : 'bg-green-100') : 'bg-gray-100' }}">
-                    <svg class="w-6 h-6 {{ $sap['available'] ? ($sap['risk'] ? 'text-red-600' : 'text-[#1A6B3C]') : 'text-gray-400' }}"
+                    {{ $sap['risk'] ? 'bg-red-100' : 'bg-green-100' }}">
+                    <svg class="w-6 h-6 {{ $sap['risk'] ? 'text-red-600' : 'text-[#1A6B3C]' }}"
                          fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
@@ -226,7 +207,6 @@
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/70 text-gray-500 border border-gray-200">SAP Model</span>
                         <h3 class="font-black text-gray-800 text-base">تحليل الذكاء الاصطناعي</h3>
                     </div>
-                    @if($sap['available'])
                     <p class="text-sm font-semibold {{ $sap['risk'] ? 'text-red-700' : 'text-[#1A6B3C]' }}">
                         {{ $sap['risk']
                             ? 'يشير نموذج الذكاء الاصطناعي إلى احتمالية تدنٍّ أكاديمي — يُنصح بمتابعة مرشدك الأكاديمي.'
@@ -235,20 +215,16 @@
                     @if($sap['confidence'])
                     <p class="text-xs text-gray-400 mt-1">نسبة الثقة: <span class="font-bold text-gray-600">{{ $sap['confidence'] }}%</span></p>
                     @endif
-                    @else
-                    <p class="text-sm text-gray-500">لا تتوفر بيانات كافية لإجراء تحليل الذكاء الاصطناعي في الوقت الحالي.</p>
-                    @endif
                 </div>
-                @if($sap['available'])
                 <span class="flex-shrink-0 text-sm font-black px-3 py-1.5 rounded-xl
                     {{ $sap['risk'] ? 'bg-red-600 text-white' : 'bg-[#1A6B3C] text-white' }}">
                     {{ $sap['label'] }}
                 </span>
-                @endif
             </div>
         </div>
+        @endif
 
-        {{-- Current semester courses --}}
+        {{-- ══ 4. مواد هذا الفصل ══ --}}
         @if($this->enrollments->isNotEmpty())
         <div>
             <div class="flex items-center justify-between mb-5">
@@ -261,43 +237,74 @@
                 </a>
                 <h2 class="text-2xl font-black text-gray-900">مواد هذا الفصل</h2>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                 @foreach ($this->enrollments as $enrollment)
                 @php
-                    $badge      = $enrollment->performance_badge;
-                    $score      = $enrollment->total_score;
-                    $rec        = $enrollment->kanaf_recommendation;
-                    $badgeConfig = match ($badge) {
-                        'أداء جيد' => ['bg'=>'bg-[#F0FAF4]','text'=>'text-[#1A6B3C]','bar'=>'bg-[#1A6B3C]','action'=>__('تقدم ممتاز في المادة'),'actionBg'=>'bg-[#F0FAF4] text-[#1A6B3C]'],
-                        'أداء متوسط' => ['bg'=>'bg-amber-50','text'=>'text-amber-600','bar'=>'bg-amber-400','action'=>__('خطوات بسيطة تقدم أكثر'),'actionBg'=>'bg-amber-50 text-amber-700'],
-                        default      => ['bg'=>'bg-red-50','text'=>'text-red-600','bar'=>'bg-red-400','action'=>__('دعم بسيط قد يصنع فرقاً'),'actionBg'=>'bg-red-50 text-red-700'],
+                    $score = $enrollment->total_score;
+
+                    $badgeConfig = match(true) {
+                        $score >= 80 => [
+                            'label'     => 'أداء مرتفع 👍',
+                            'bg'        => 'bg-[#F0FAF4]',
+                            'text'      => 'text-[#1A6B3C]',
+                            'border'    => 'border-green-200',
+                            'levelText' => 'ممتاز',
+                            'levelColor'=> 'text-[#1A6B3C]',
+                            'chipBg'    => 'bg-[#F0FAF4] text-[#1A6B3C]',
+                            'chip'      => 'تقدم ممتاز في المادة',
+                        ],
+                        $score >= 55 => [
+                            'label'     => 'أداء متوسط ℹ️',
+                            'bg'        => 'bg-amber-50',
+                            'text'      => 'text-amber-700',
+                            'border'    => 'border-amber-200',
+                            'levelText' => 'جيد',
+                            'levelColor'=> 'text-amber-700',
+                            'chipBg'    => 'bg-amber-50 text-amber-700',
+                            'chip'      => 'خطوات بسيطة تقدم أكثر',
+                        ],
+                        default      => [
+                            'label'     => 'يحتاج تحسين ⚠️',
+                            'bg'        => 'bg-red-50',
+                            'text'      => 'text-red-700',
+                            'border'    => 'border-red-200',
+                            'levelText' => 'يحتاج متابعة',
+                            'levelColor'=> 'text-amber-600',
+                            'chipBg'    => 'bg-red-50 text-red-700',
+                            'chip'      => 'دعم بسيط قد يصنع فرقاً',
+                        ],
                     };
                 @endphp
-                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col gap-4">
-                    {{-- Header --}}
-                    <div class="flex items-start justify-between gap-3">
-                        <span class="text-xs font-bold px-2.5 py-1 rounded-full {{ $badgeConfig['bg'] }} {{ $badgeConfig['text'] }}">
-                            {{ $badge }}
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex flex-col gap-3">
+
+                    {{-- Badge --}}
+                    <div class="flex justify-end">
+                        <span class="inline-flex items-center gap-1 text-xs font-bold px-3 py-1.5 rounded-full border
+                                     {{ $badgeConfig['bg'] }} {{ $badgeConfig['text'] }} {{ $badgeConfig['border'] }}">
+                            {{ $badgeConfig['label'] }}
                         </span>
-                        <div class="text-right flex-1">
-                            <h3 class="font-black text-gray-800 text-base leading-tight">{{ $enrollment->course->name }}</h3>
-                            <p class="text-xs text-gray-400 mt-0.5">{{ $enrollment->course->code }}</p>
-                        </div>
                     </div>
-                    {{-- Score bar --}}
-                    <div>
-                        <div class="flex justify-between text-xs text-gray-400 mb-1.5">
-                            <span class="font-bold text-gray-700">{{ $score }}<span class="font-normal">/100</span></span>
-                            <span>الدرجة الحالية</span>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-2">
-                            <div class="{{ $badgeConfig['bar'] }} h-2 rounded-full transition-all" style="width:{{ min($score,100) }}%"></div>
-                        </div>
+
+                    {{-- Course info --}}
+                    <div class="space-y-1.5 text-sm text-right">
+                        <p class="text-gray-800">
+                            <span class="font-black text-gray-900">المادة: </span>{{ $enrollment->course->name }}
+                        </p>
+                        <p class="text-gray-800">
+                            <span class="font-black text-gray-900">مستوى المادة: </span>
+                            <span class="font-bold {{ $badgeConfig['levelColor'] }}">{{ $badgeConfig['levelText'] }}</span>
+                        </p>
+                        <p class="text-gray-600 leading-snug">
+                            <span class="font-black text-gray-900">سبب المستوى: </span>{{ $enrollment->level_reason }}
+                        </p>
                     </div>
-                    {{-- Action label --}}
-                    <span class="text-xs font-semibold px-3 py-1.5 rounded-lg {{ $badgeConfig['actionBg'] }} self-start">
-                        {{ $badgeConfig['action'] }}
+
+                    {{-- Action chip --}}
+                    <span class="text-xs font-semibold px-3 py-1.5 rounded-lg {{ $badgeConfig['chipBg'] }} self-start">
+                        {{ $badgeConfig['chip'] }}
                     </span>
+
                     {{-- CTA --}}
                     <a href="{{ route('course-details', $enrollment->course) }}"
                        class="mt-auto w-full text-center bg-[#1A6B3C] hover:bg-[#155C33] text-white text-sm font-bold py-2.5 rounded-xl transition-colors">
@@ -309,7 +316,7 @@
         </div>
         @endif
 
-        {{-- Saved career paths --}}
+        {{-- ══ 5. المسارات المفضلة ══ --}}
         @if($this->savedPaths->isNotEmpty())
         <div>
             <div class="flex items-center justify-between mb-4">
@@ -322,6 +329,7 @@
                 </a>
                 <h2 class="text-2xl font-black text-gray-900">المسارات المفضلة</h2>
             </div>
+            <p class="text-sm text-gray-400 text-right mb-5">المسارات التي قمت بحفظها لمتابعتها لاحقاً.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                 @foreach ($this->savedPaths as $pivot)
                 @php $path = $pivot->careerPath; @endphp
@@ -332,9 +340,9 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                             </svg>
                         </div>
-                        <h3 class="font-black text-[#1A6B3C]">{{ $path->name }}</h3>
+                        <h3 class="font-black text-[#1A6B3C] text-base">{{ $path->name }}</h3>
                     </div>
-                    <p class="text-xs text-gray-500 leading-relaxed mb-4">{{ $path->description }}</p>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-4">{{ $path->description }}</p>
                     <a href="{{ route('career-path-detail', $path) }}"
                        class="block text-center text-sm font-bold text-white bg-[#1A6B3C] hover:bg-[#155C33] py-2.5 rounded-xl transition-colors">
                         استعراض المسار

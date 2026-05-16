@@ -263,35 +263,11 @@
                 @endif
             </div>
 
-            {{-- ══ كنف Options ══ --}}
+            {{-- ══ خيارات كنف ══ --}}
             <div>
-                <h2 class="text-xl font-black text-gray-900 mb-4 text-right">كيف يمكن لكَـنَـف مساعدتك؟</h2>
+                <h2 class="text-xl font-black text-gray-900 mb-4 text-right">خيارات كنف</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-                    {{-- كنف التعليم --}}
-                    <div class="relative bg-white rounded-2xl border-2 shadow-sm overflow-visible
-                                {{ $rec === 'education' ? 'border-[#6B21A8]' : 'border-gray-100' }}">
-                        @if($rec === 'education')
-                        <div class="absolute -top-3.5 right-4 bg-[#6B21A8] text-white text-xs font-black px-3 py-1 rounded-full">
-                            الخيار الأفضل ⭐
-                        </div>
-                        @endif
-                        <div class="p-5 space-y-3">
-                            <div class="text-center">
-                                <div class="text-2xl mb-1">📚</div>
-                                <h3 class="font-black text-gray-900 text-base">كنف التعليم</h3>
-                            </div>
-                            <p class="text-sm text-gray-500 text-center leading-relaxed">
-                                محتوى تعليمي مبسط يساعدك على فهم أسباب التعثر وتحسين مستواك الأكاديمي
-                            </p>
-                            <button wire:click="openModal('education')"
-                                    class="w-full py-2.5 rounded-xl text-sm font-bold transition-colors
-                                           {{ $rec === 'education' ? 'bg-[#6B21A8] text-white hover:bg-[#5b1a96]' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
-                                استعرض المصادر
-                            </button>
-                        </div>
-                    </div>
 
                     {{-- كنف الإرشاد --}}
                     <div class="relative bg-white rounded-2xl border-2 shadow-sm overflow-visible
@@ -317,6 +293,30 @@
                         </div>
                     </div>
 
+                    {{-- كنف التعليم --}}
+                    <div class="relative bg-white rounded-2xl border-2 shadow-sm overflow-visible
+                                {{ $rec === 'education' ? 'border-[#6B21A8]' : 'border-gray-100' }}">
+                        @if($rec === 'education')
+                        <div class="absolute -top-3.5 right-4 bg-[#6B21A8] text-white text-xs font-black px-3 py-1 rounded-full">
+                            الخيار الأفضل ⭐
+                        </div>
+                        @endif
+                        <div class="p-5 space-y-3">
+                            <div class="text-center">
+                                <div class="text-2xl mb-1">📚</div>
+                                <h3 class="font-black text-gray-900 text-base">كنف التعليم</h3>
+                            </div>
+                            <p class="text-sm text-gray-500 text-center leading-relaxed">
+                                محتوى تعليمي مبسط يساعدك على فهم أسباب التعثر وتحسين مستواك الأكاديمي
+                            </p>
+                            <button wire:click="openModal('education')"
+                                    class="w-full py-2.5 rounded-xl text-sm font-bold transition-colors
+                                           {{ $rec === 'education' ? 'bg-[#6B21A8] text-white hover:bg-[#5b1a96]' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
+                                جرّب قبل تنفيذه
+                            </button>
+                        </div>
+                    </div>
+
                     {{-- كنف القرار --}}
                     <div class="relative bg-white rounded-2xl border-2 shadow-sm overflow-visible
                                 {{ $rec === 'decision' ? 'border-[#6B21A8]' : 'border-gray-100' }}">
@@ -336,7 +336,7 @@
                             <button wire:click="openModal('decision')"
                                     class="w-full py-2.5 rounded-xl text-sm font-bold transition-colors
                                            {{ $rec === 'decision' ? 'bg-[#6B21A8] text-white hover:bg-[#5b1a96]' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
-                                جرّب القرار قبل تنفيذه
+                                استعرض المصادر
                             </button>
                         </div>
                     </div>
